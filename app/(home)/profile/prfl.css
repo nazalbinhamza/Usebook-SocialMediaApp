@@ -1,0 +1,104 @@
+.dp{
+    width: 160px ;
+    height: 160px ;
+    border-radius: 100px 100px 100px 100px ;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU0fdjz3q_3e-gRcoWqB_B0gSSRxM6xeLkzw&usqp=CAU');
+    background-size: cover;
+    background-position: center;
+    margin-left: 200px;
+    margin-top: 30px;
+}
+.text-custom{
+    font-size: 14px;
+}
+.highlight1-dp{
+    width: 80px ;
+    height: 80px ;
+    border-radius: 100px 100px 100px 100px ;
+    border: 1px solid rgb(179, 179, 179);
+    background-size: cover;
+    background-position: center;
+    margin-left: 170px;
+    margin-top: 70px;
+}
+.inner-1{
+    width: 70px ;
+    height: 70px ;
+    border-radius: 100px 100px 100px 100px ;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyNms134lBkuBeviQehm4eBz9jNU6S2LsS4g&usqp=CAU');
+    background-size: cover;
+    background-position: center;
+    margin-left: 4.5px;
+    margin-top: 4px;
+}
+.highlight2-dp{
+    width: 80px ;
+    height: 80px ;
+    border-radius: 100px 100px 100px 100px ;
+    border: 1px solid rgb(179, 179, 179);
+    background-size: cover;
+    background-position: center;
+    margin-left: 270px;
+    margin-top: -80px;
+}
+.inner-2{
+    width: 70px ;
+    height: 70px ;
+    border-radius: 100px 100px 100px 100px ;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNNG3vY49n1goSbn4c02hupKxnXHRczvflfErf7Fc0Wh5J7PG3PvSdxe8lowWAPOq2iU8&usqp=CAU');
+    background-size: cover;
+    background-position: center;
+    margin-left: 4.5px;
+    margin-top: 4px;
+}
+.highlight3-dp{
+    width: 80px ;
+    height: 80px ;
+    border-radius: 100px 100px 100px 100px ;
+    border: 1px solid rgb(179, 179, 179);
+    background-size: cover;
+    background-position: center;
+    margin-left: 370px;
+    margin-top: -80px;
+}
+.inner-3{
+    width: 70px ;
+    height: 70px ;
+    border-radius: 100px 100px 100px 100px ;
+    background-image: url('https://static.vecteezy.com/system/resources/previews/030/321/276/non_2x/backlit-by-morning-sun-young-tourist-admires-foggy-mountain-range-arms-outstretched-for-social-media-post-size-ai-generated-free-photo.jpg');
+    background-size: cover;
+    background-position: center;
+    margin-left: 4.5px;
+    margin-top: 4px;
+}
+.highlight4-dp{
+    width: 80px ;
+    height: 80px ;
+    border-radius: 100px 100px 100px 100px ;
+    border: 1px solid rgb(179, 179, 179);
+    background-size: cover;
+    background-position: center;
+    margin-left: 470px;
+    margin-top: -80px;
+}
+.inner-4{
+    width: 70px ;
+    height: 70px ;
+    border-radius: 100px 100px 100px 100px ;
+    background-color: rgb(200, 199, 199);
+    background-size: cover;
+    background-position: center;
+    margin-left: 4.5px;
+    margin-top: 4px;
+}
+body{
+    background-color: rgb(220, 220, 220);
+    overflow: auto;
+}
+body::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar width */
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: transparent;  /* Set thumb color to transparent */
+}
