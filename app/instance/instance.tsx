@@ -3,7 +3,7 @@ import axios from "axios";
 const adminToken = localStorage.getItem('token')
 
 const instance = axios.create({
-  baseURL:  "https://social-media-5ukj.onrender.com"
+  baseURL:  process.env.NEXT_PUBLIC_HOST_URL
   
  
 

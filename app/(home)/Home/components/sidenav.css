@@ -57,6 +57,16 @@
     width: 439px;
     height: 100vh;
     border-left: 1px  solid rgb(183, 183, 183);
+    overflow: auto;
+}
+.suggetion-div::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbars in Internet Explorer 10+ */
+.suggetion-div {
+    -ms-overflow-style: none;
+    scrollbar-width: none; /* Hide scrollbars in Firefox */
 }
 .home-text{
     margin-left: 105px;

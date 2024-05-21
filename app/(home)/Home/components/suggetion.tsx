@@ -1,21 +1,51 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import '../Home.css';
 import instance from '@/app/instance/instance';
+import './sidenav.css';
 
 
 function suggetion() {
 
-   const [user,setUser] = useState([])
+  const [users, setUsers] = useState([]);
+  const [userId,setUserId] = useState([]);
 
-  const getusers = async ()=> {
-    const response : any = await instance.get('/user')
-    setUser(response)
+  
 
-    console.log(user);
-    
-  }
+  const getUser = async () => {
+    try {
+      const response = await instance.get('/user');
+      setUsers(response.data);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []); 
+
+  useEffect(() => {
+    console.log(users, 'users');
+  }, [users]);
+
+  const getUserId = async (id:any)=>{
+
+    try {
+      const userId = id;
+      console.log(userId,'hhh');
+      
+      const res = await instance.put(`/user/${userId}/follow`, { _id: userId});
+      console.log(res);
+      
+      setUserId(res.data);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  };
+
+  
 
   return (
     <div>
@@ -32,34 +62,20 @@ function suggetion() {
           <p className="mt-[50px] ml-[50px] suggest-for-you font-semibold">Suggested for you</p>
           <p className="ml-[350px] mt-[-18px] username-story cursor-pointer">See All</p>
         </div>
-        <div className="cursor-pointer">
-        <div className="despa-dp"></div>
-        <p className="ml-[120px] mt-[-35px] username-story font-semibold">despa_676</p>
-        <p className="ml-[120px] username-story text-gray-600">Followed by abraham + 1...</p>
-        <p className="username-story font-semibold text-blue-600 ml-[350px] mt-[-25px] ">follow</p>
-        </div>
-        <div className="cursor-pointer">
-        <div className="xavi-dp"></div>
-        <p className="ml-[120px] mt-[-35px] username-story font-semibold">xavi_alexander</p>
-        <p className="ml-[120px] username-story text-gray-600">Follows you</p>
-        <p className="username-story font-semibold text-blue-600 ml-[350px] mt-[-25px] ">follow</p>
-        </div>
-        <div className="cursor-pointer">
-        <div className="david-dp"></div>
-        <p className="ml-[120px] mt-[-35px] username-story font-semibold">david</p>
-        <p className="ml-[120px] username-story text-gray-600">followed by luca</p>
-        <p className="username-story font-semibold text-blue-600 ml-[350px] mt-[-25px] ">follow</p>
-        </div>
-        <div className="cursor-pointer">
-        <div className="fernandas-dp"></div>
-        <p className="ml-[120px] mt-[-35px] username-story font-semibold">fernandas</p>
-        <p className="ml-[120px] username-story text-gray-600">followed by bruno + 1...</p>
-        <p className="username-story font-semibold text-blue-600 ml-[350px] mt-[-25px] ">follow</p>
-        </div>
-        
+
+    
+        {users.map((user:any) => (
+          <div key={user.id}  className="cursor-pointer">
+          <div className="despa-dp"></div>      
+          <p className="ml-[120px] mt-[-35px] username-story font-semibold">{user.username}</p>
+          <p className="ml-[120px] username-story text-gray-600">Followed by user + 1...</p>
+          <button onClick={() => getUserId(user._id)} className="username-story font-semibold text-blue-600 ml-[350px]  ">follow</button>
+          {/*  */}
+          </div>
+   ))}
       </div>
     </div>
-  )
-}
+  )}
+
 
 export default suggetion

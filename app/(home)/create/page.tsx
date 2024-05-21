@@ -3,28 +3,26 @@ import React, { useState } from 'react';
 import SindNav from '../Home/components/SidNav';
 import Suggetion from '../Home/components/suggetion';
 import './create.css';
-import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import instance from '@/app/instance/instance';
 
 function page() {
 
-  const [post,setPost] = useState([]);
+  const [post,setPost] = useState<any>([]);
   
-  const handlePost = async (e: any) => {
-    try {
-      
-      const selectedFile = e.target.files[0];
-      const formData = new FormData()
-      formData.append('file', selectedFile);
-      formData.append('desc', 'something');
-      formData.append('userId', '663c610c0fe5ec8be36a53fe'); 
+    const handlePost = async (e: any)=>{
 
-      setPost(selectedFile); 
-  
+      const selectedFile = e.target.files[0];
+
+      setPost(selectedFile);
+
+    try {
+      const formData = new FormData()
+      formData.append('file', post);
+      formData.append('desc', 'something');
+      formData.append('userId', '663c610c0fe5ec8be36a53fe');     
       
-      
-      await instance.post('/createPost', { ...formData }, { headers :{
+     const response =  await instance.post('/createPost', { ...formData }, { headers :{
         'Content-Type': 'multipart/form-data' 
       }});
       toast.success('Post Uploaded');
@@ -34,6 +32,11 @@ function page() {
     }
     
   };
+
+ 
+
+
+  
 
   return (
     <div>

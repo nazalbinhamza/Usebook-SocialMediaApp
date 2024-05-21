@@ -23,6 +23,10 @@ function page() {
   };
 
 
+  console.log(username);
+  
+
+
   
 
   return (
