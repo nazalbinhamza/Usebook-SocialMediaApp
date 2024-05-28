@@ -69,8 +69,9 @@ function suggetion() {
           <div className="despa-dp"></div>      
           <p className="ml-[120px] mt-[-35px] username-story font-semibold">{user.username}</p>
           <p className="ml-[120px] username-story text-gray-600">Followed by user + 1...</p>
-          <button onClick={() => getUserId(user._id)} className="username-story font-semibold text-blue-600 ml-[350px]  ">follow</button>
-          {/*  */}
+          <div className=' float-right w-10 mr-10 mt-[-30px]'>
+          <button onClick={() => getUserId(user._id)} className="username-story font-semibold text-blue-600 ">follow</button>
+          </div>
           </div>
    ))}
       </div>

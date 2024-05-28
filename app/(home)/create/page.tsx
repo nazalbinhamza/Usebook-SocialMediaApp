@@ -13,13 +13,11 @@ function page() {
     const handlePost = async (e: any)=>{
 
       const selectedFile = e.target.files[0];
-
-      setPost(selectedFile);
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
     try {
       const formData = new FormData()
-      formData.append('file', post);
-      formData.append('desc', 'something');
+      formData.append('file', selectedFile);
+      formData.append('desc', 'something'); 
       formData.append('userId', '663c610c0fe5ec8be36a53fe');     
       
      const response =  await instance.post('/createPost', { ...formData }, { headers :{
