@@ -14,7 +14,10 @@ export default function Home() {
     try{
       e.preventDefault();
      const response =  await axios.post('https://social-media-5ukj.onrender.com/auth/login',{email:email,password:password})
-      if(email==email)localStorage.setItem('role','user')
+      if(email==email){
+      localStorage.setItem('role','user')
+      localStorage.setItem('userId',response.data._id)
+      }
       else{
         toast.error('Invalid email or password');
       }

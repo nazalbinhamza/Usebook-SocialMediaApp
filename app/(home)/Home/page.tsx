@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
 import "./Home.css";
 import SidNav from "./components/SidNav";
 import StoryNav from "./components/StoryNav";
@@ -7,6 +7,7 @@ import Suggetion from "./components/suggetion";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { toast } from 'react-hot-toast';
 
 const style = {
   position: "absolute" as "absolute",
@@ -23,30 +24,56 @@ const style = {
 function page() {
   const [like, setLike] = useState(false);
   const [like1, setLike1] = useState(false);
-  const [selectFile,setSelectFile] = useState(null);
-  const [description,setDescription] = useState('')
+  const [selectFile,setSelectFile] = useState<any>([])
+
+  const isEmpty = selectFile === null;
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleFile = (e:any)=> {
+  const fileInput = useRef<any>(null)
+  const descInput = useRef<any>(null)
+
+  const saveButton = (e:any)=>{
     e.preventDefault();
-    if(e.target.files && e.target.files[0]){
-      setSelectFile(e.target.files[0]);
-    }else {
-      console.log('No File Selected');
-    }
+    const file = fileInput.current.files[0];
+    const desc = descInput.current.value;
+
+    if (file) {
+          setSelectFile([{file,desc},...selectFile]);
+          fileInput.current.value = '';
+          descInput.current.value = '';
+        } else {
+          console.log('No File Selected');
+        }
+
+        toast.success('Successfully Posted');
+   
+    
   }
 
-  const handleDesc = (e:any)=>{
-    e.preventDefault();
-    if(e.target.value){
-      setDescription(e.target.value)
-    }else{
-      console.log('No Description');
-    }
-  }
+//   const handlePost = async (e: any)=>{
+
+//     const selectedFile = e.target.files[0];
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+//   try {
+//     const formData = new FormData()
+//     formData.append('file', selectedFile);
+//     formData.append('desc', 'something'); 
+//     formData.append('userId', '663c610c0fe5ec8be36a53fe');     
+    
+//    const response =  await instance.post('/createPost', { ...formData }, { headers :{
+//       'Content-Type': 'multipart/form-data' 
+//     }});
+//     toast.success('Post Uploaded');
+//   } catch (error) {
+//     console.error('Error uploading post:', error);
+//     toast.error('Failed to upload post');
+//   }
+  
+// };
+
 
   return (
     <div>
@@ -66,36 +93,37 @@ function page() {
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 Create a Post
               </Typography>
-              <div className="h-[250px] w-[325px] border-2 border-black rounded-md">
-                <input type="file" onChange={handleFile}/>
-                {selectFile ? (
-                  <img src={URL.createObjectURL(selectFile)} alt="preview" width={200} height={100} />
-
-                ):(
-                  <img alt="Uploading Image" />
-                )}
+              <form onSubmit={saveButton}>
+              <div className="h-[50px] w-[325px] border-2 border-black rounded-md pt-[8px] pl-[10px]">
+                <input type="file" ref={fileInput}/>
+                {/* {selectFile.map((x:any)=>(
+                    <img src={URL.createObjectURL(x.file)} alt="preview" />
+                  )) 
+                  } */}
               </div>
-              <input onChange={handleDesc} type="text" className="mt-[10px] h-[150px] w-[325px] border-2 border-black rounded-md" />
+              <input ref={descInput} type="text" className="mt-[10px] h-[150px] w-[325px] border-2 border-black rounded-md" />
+              <button onClick={handleClose} className="text-white bg-blue-500 w-[100px] rounded-md mt-[10px]">Cancel</button>
+              <button  type="submit" className="text-white bg-blue-500 w-[100px] rounded-md mt-[10px] ml-[40px]">Save</button>
+              </form>
             </Box>
           </Modal>
         </div>
-        <div className="post-div">
+        {!isEmpty&&<>
+          {selectFile.map((item:any)=>(
+            <div className="post-div">
           <div>
             <div className="circle"></div>
             <p className="ml-[95px] mt-[-30px] font-semibold font-sans">
-              roadway
+              user
               <span className="font-normal text-sm ml-[5px] text-gray-500">
                 {" "}
                 1w
               </span>
             </p>
           </div>
-          {selectFile ? (
-                  <img src={URL.createObjectURL(selectFile)} className="car-img" alt="preview" />
-
-                ):(
-                 <p> </p>
-          )}
+         
+            <img src={URL.createObjectURL(item.file)} className="car-img" alt="preview" />
+         
           <svg
             onClick={() => {
               like ? setLike(false) : setLike(true);
@@ -116,33 +144,18 @@ function page() {
           <p className="ml-[73px]">7,126 likes</p>
           <div className="circle2"></div>
           <p className="ml-[53px] mt-[5px]">
-            <a className="font-semibold">roadway</a> {description ? (
-                  <a>{description}</a>
-
-                ):(
-                 <p> </p>
-          )}
+            <a className="font-semibold">user</a>
+                  <a>{item.desc}</a>
           </p>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            className="w-6 h-6  ml-[90px] mt-[-167px]"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"
-            />
-          </svg>
         </div>
+         )) 
+        }
+        </>}
         <div className="post-div">
           <div>
             <div className="circle"></div>
             <p className="ml-[95px] mt-[-30px] font-semibold font-sans">
-              roadway
+              user
               <span className="font-normal text-sm ml-[5px] text-gray-500">
                 {" "}
                 1w

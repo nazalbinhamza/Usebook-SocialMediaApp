@@ -31,9 +31,6 @@ function page() {
     
   };
 
- 
-
-
   
 
   return (
