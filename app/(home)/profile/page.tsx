@@ -10,7 +10,7 @@ function page() {
         <SidNav />
         <div className='w-[1200px] h-[400px] float-end'>
           <div className='dp'></div>
-          <h3 className='ml-[450px] mt-[-130px] font-semibold'>user</h3>
+          <h3 className='ml-[450px] mt-[-130px] font-semibold'>{localStorage.getItem('username')}</h3>
           <button className='bg-gray-200 rounded w-[120px] h-[30px] ml-[520px] mt-[-28px] font-semibold text-custom absolute'>Edit profile</button>
           <button className='bg-gray-200 rounded w-[120px] h-[30px] ml-[650px] mt-[-28px] font-semibold text-custom absolute'>View archive</button>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-7 h-7 ml-[785px] mt-[-25px]">

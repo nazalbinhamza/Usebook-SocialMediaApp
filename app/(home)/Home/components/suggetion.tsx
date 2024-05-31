@@ -52,7 +52,7 @@ function suggetion() {
         <div className="suggetion-div float-right">
         <div className="cursor-pointer">
         <div className="suggetion-dp"></div>
-        <p className="ml-[120px] mt-[-35px] username-story font-semibold">user</p>
+        <p className="ml-[120px] mt-[-35px] username-story font-semibold">{localStorage.getItem('username')}</p>
         <p className="ml-[120px] mt-[-10px]">..</p>
         <Link href='./sign'>
         <p className="username-story font-semibold text-blue-600 ml-[350px] mt-[-25px] ">switch</p>

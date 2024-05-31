@@ -8,7 +8,8 @@ const instance = axios.create({
  
 
 });
-console.log(instance);
+console.log(process.env.NEXT_PUBLIC_HOST_URL);
+
 
 
 

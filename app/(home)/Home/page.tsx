@@ -4,75 +4,108 @@ import "./Home.css";
 import SidNav from "./components/SidNav";
 import StoryNav from "./components/StoryNav";
 import Suggetion from "./components/suggetion";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
 import { toast } from 'react-hot-toast';
+import instance from "@/app/instance/instance";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import TextField from '@mui/material/TextField';
+import Fade from '@mui/material/Fade';
+import Backdrop from '@mui/material/Backdrop';
+
+// const style = {
+//   position: "absolute" as "absolute",
+//   top: "50%",
+//   left: "50%",
+//   transform: "translate(-50%, -50%)",
+//   width: 400,
+//   bgcolor: "background.paper",
+//   border: "2px solid #000",
+//   boxShadow: 24,
+//   p: 4,
+// };
 
 const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 600,
+  bgcolor: '#1c1c1c',
+  borderRadius: '10px',
   boxShadow: 24,
   p: 4,
+  outline: 'none',
+  color: 'white',
+};
+
+const buttonStyle = {
+  marginTop: '10px',
+  display: 'flex',
+  justifyContent: 'center'
 };
 
 function page() {
+
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [open, setOpen] = useState(false);
+  const [selectFile, setSelectFile] = useState(null);
+  const [description, setDescription] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  
   const [like, setLike] = useState(false);
   const [like1, setLike1] = useState(false);
-  const [selectFile,setSelectFile] = useState<any>([])
+
 
   const isEmpty = selectFile === null;
 
-  const [open, setOpen] = React.useState(false);
+
+ 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const fileInput = useRef<any>(null)
-  const descInput = useRef<any>(null)
-
-  const saveButton = (e:any)=>{
-    e.preventDefault();
-    const file = fileInput.current.files[0];
-    const desc = descInput.current.value;
-
-    if (file) {
-          setSelectFile([{file,desc},...selectFile]);
-          fileInput.current.value = '';
-          descInput.current.value = '';
-        } else {
-          console.log('No File Selected');
-        }
-
-        toast.success('Successfully Posted');
-   
-    
-  }
-
-//   const handlePost = async (e: any)=>{
-
-//     const selectedFile = e.target.files[0];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-//   try {
-//     const formData = new FormData()
-//     formData.append('file', selectedFile);
-//     formData.append('desc', 'something'); 
-//     formData.append('userId', '663c610c0fe5ec8be36a53fe');     
-    
-//    const response =  await instance.post('/createPost', { ...formData }, { headers :{
-//       'Content-Type': 'multipart/form-data' 
-//     }});
-//     toast.success('Post Uploaded');
-//   } catch (error) {
-//     console.error('Error uploading post:', error);
-//     toast.error('Failed to upload post');
-//   }
   
-// };
+  const handleFile = (e:any) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectFile(e.target.files[0]);
+    } else {
+      console.log('No file selected');
+    }
+  };
+
+
+  const handleApi = async (post:any) => {
+
+
+
+    let usernteid:any = (localStorage.getItem("userid"))
+    
+    
+   
+    const formData = new FormData();
+    formData.append('file', post);
+    formData.append('desc', description);
+    formData.append('userId', usernteid);
+    try {
+      const response = await instance.post('/createPost', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      console.log('Post created:', response.data);
+      setImageUrl(response.data.post.image);
+    } catch (error) {
+      console.error('Error creating post:', error);
+    }
+  };
+
+  const addPost = () => {
+    if (selectFile) {
+      handleApi(selectFile);   
+  
+      handleClose(); 
+    }
+  };
 
 
   return (
@@ -81,48 +114,69 @@ function page() {
       <Suggetion />
       <div className="post-section float-right">
         <StoryNav />
-        <div className="h-[80px] w-[620px] ml-[55px] mt-[30px] border-2 border-black rounded-md pl-[190px] pt-[20px]">
-          <button className="border-2 border-gray-600 rounded-xl w-[250px] h-[40px] text-[12px]" onClick={handleOpen}>Start a post, try writing with AI</button>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Create a Post
-              </Typography>
-              <form onSubmit={saveButton}>
-              <div className="h-[50px] w-[325px] border-2 border-black rounded-md pt-[8px] pl-[10px]">
-                <input type="file" ref={fileInput}/>
-                {/* {selectFile.map((x:any)=>(
-                    <img src={URL.createObjectURL(x.file)} alt="preview" />
-                  )) 
-                  } */}
-              </div>
-              <input ref={descInput} type="text" className="mt-[10px] h-[150px] w-[325px] border-2 border-black rounded-md" />
-              <button onClick={handleClose} className="text-white bg-blue-500 w-[100px] rounded-md mt-[10px]">Cancel</button>
-              <button  type="submit" className="text-white bg-blue-500 w-[100px] rounded-md mt-[10px] ml-[40px]">Save</button>
-              </form>
-            </Box>
-          </Modal>
-        </div>
-        {!isEmpty&&<>
-          {selectFile.map((item:any)=>(
+       
+      <div className="h-[80px] w-[620px] ml-[55px] mt-[30px] border-2 border-black rounded-md pl-[190px] pt-[20px]">
+      <button className="border-2 border-gray-600 rounded-xl w-[250px] h-[40px] text-[12px]" onClick={handleOpen} >Start a post, try writing with AI</button>
+      </div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{ timeout: 500 }}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Fade in={open}>
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Create Post
+            </Typography>
+
+            <div className="h-[50px] w-[325px] border-2 border-black rounded-md pt-[8px] pl-[10px]">
+              <input
+                ref={fileInputRef}
+                onChange={handleFile}
+                type="file"
+                accept="image/*"
+              />
+            </div>
+            <TextField
+              label="Description"
+              variant="outlined"
+              multiline
+              rows={4}
+              fullWidth
+              margin="normal"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              InputLabelProps={{ style: { color: '#fff', borderColor: 'white' } }}
+              InputProps={{ style: { color: '#fff', borderColor: '#fff' } }}
+            />
+            <div style={buttonStyle}>
+              <Button variant="outlined" style={{ color: 'white' }} onClick={handleClose}>Cancel</Button>
+              <Button variant="contained" color="primary" onClick={addPost} style={{ marginLeft: '10px' }}>Post</Button>
+            </div>
+          </Box>
+        </Fade>
+      </Modal>
+      {!isEmpty&&<>
+         
             <div className="post-div">
           <div>
-            <div className="circle"></div>
+            <div className="circle1"></div>
             <p className="ml-[95px] mt-[-30px] font-semibold font-sans">
-              user
+              {localStorage.getItem('username')}
               <span className="font-normal text-sm ml-[5px] text-gray-500">
                 {" "}
-                1w
+                2s
               </span>
             </p>
           </div>
-         
-            <img src={URL.createObjectURL(item.file)} className="car-img" alt="preview" />
+         {imageUrl && (
+            <img src={imageUrl} className="car-img" alt="preview" />
+         )}
+          
          
           <svg
             onClick={() => {
@@ -141,21 +195,23 @@ function page() {
               d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
             />
           </svg>
-          <p className="ml-[73px]">7,126 likes</p>
+          <p className="ml-[73px]">126 likes</p>
           <div className="circle2"></div>
-          <p className="ml-[53px] mt-[5px]">
-            <a className="font-semibold">user</a>
-                  <a>{item.desc}</a>
+          {description && (
+            <p className="ml-[53px] mt-[5px]">
+            <a className="font-semibold">{localStorage.getItem('username')}</a>
+                  <a>{description}</a>
           </p>
+          )}
+          
         </div>
-         )) 
-        }
-        </>}
+     
+        </>} 
         <div className="post-div">
           <div>
             <div className="circle"></div>
             <p className="ml-[95px] mt-[-30px] font-semibold font-sans">
-              user
+              roadway
               <span className="font-normal text-sm ml-[5px] text-gray-500">
                 {" "}
                 1w
