@@ -76,9 +76,9 @@ function page() {
     }
   };
 
-  var userid:any = (localStorage.getItem("userid"))
+  let userid:any = (localStorage.getItem("userid"))
   const handleApi = async (post:any) => {  
-    
+    let userid:any = (localStorage.getItem("userid"))
     
    
     const formData = new FormData();
@@ -187,9 +187,7 @@ function page() {
               </span>
             </p>
           </div>
-      
-            <img src={item.image} className="car-img" alt="preview" />
-    
+        <div style={{borderRadius:'10px',width:'470px',height:'400px', backgroundImage: `url(${item.image})`, backgroundSize: 'cover', backgroundPosition: 'center',marginTop:'40px',marginLeft:'45px'}}></div>
           
          
           <svg
@@ -232,13 +230,7 @@ function page() {
               </span>
             </p>
           </div>
-          <img
-            src="car4.jpg"
-            className="car-img"
-            onDoubleClick={() => {
-              like ? setLike(false) : setLike(true);
-            }}
-          />
+          <div style={{borderRadius:'10px',width:'470px',height:'400px', backgroundImage: `url(${item.image})`, backgroundSize: 'cover', backgroundPosition: 'center',marginTop:'40px',marginLeft:'45px'}}></div>
           <svg
             onClick={() => {
               like ? setLike(false) : setLike(true);
