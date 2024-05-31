@@ -10,6 +10,7 @@ function suggetion() {
 
   const [users, setUsers] = useState([]);
   const [userId,setUserId] = useState([]);
+  
 
   
 
@@ -33,11 +34,13 @@ function suggetion() {
   const getUserId = async (id:any)=>{
 
     try {
+      let userid:any = (localStorage.getItem("userid"))
       const userId = id;
       console.log(userId,'hhh');
       
-      const res = await instance.put(`/user/${userId}/follow`, { _id: userId});
-      console.log(res);
+      const res = await instance.put(`/user/${userId}/follow`, { _id: userid});
+      console.log(res,'kkkkkkk');
+      
       
       setUserId(res.data);
     } catch (error) {

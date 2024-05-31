@@ -1,5 +1,5 @@
 "use client";
-import React, { useState,useRef } from "react";
+import React, { useState,useRef,useEffect } from "react";
 import "./Home.css";
 import SidNav from "./components/SidNav";
 import StoryNav from "./components/StoryNav";
@@ -54,12 +54,13 @@ function page() {
   const [selectFile, setSelectFile] = useState(null);
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [post,setPost ]= useState<any>([])
   
   const [like, setLike] = useState(false);
   const [like1, setLike1] = useState(false);
 
 
-  const isEmpty = selectFile === null;
+  const isEmpty = post === null;
 
 
  
@@ -75,19 +76,15 @@ function page() {
     }
   };
 
-
-  const handleApi = async (post:any) => {
-
-
-
-    let usernteid:any = (localStorage.getItem("userid"))
+  var userid:any = (localStorage.getItem("userid"))
+  const handleApi = async (post:any) => {  
     
     
    
     const formData = new FormData();
     formData.append('file', post);
     formData.append('desc', description);
-    formData.append('userId', usernteid);
+    formData.append('userId', userid);
     try {
       const response = await instance.post('/createPost', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
@@ -98,6 +95,23 @@ function page() {
       console.error('Error creating post:', error);
     }
   };
+
+  useEffect(()=>{
+    const fetchData = async ()=>{
+     try {
+       const response = await instance.get(`./posts/${userid}/timeline`)
+       if (response.status==200){
+         setPost(response.data)
+         
+       }
+     } catch (error) {
+       console.log(error)
+     }
+     
+    }
+    fetchData()
+ 
+   },[])
 
   const addPost = () => {
     if (selectFile) {
@@ -161,7 +175,7 @@ function page() {
         </Fade>
       </Modal>
       {!isEmpty&&<>
-         
+         {post.map((item:any,index:any)=>(
             <div className="post-div">
           <div>
             <div className="circle1"></div>
@@ -173,9 +187,9 @@ function page() {
               </span>
             </p>
           </div>
-         {imageUrl && (
-            <img src={imageUrl} className="car-img" alt="preview" />
-         )}
+      
+            <img src={item.image} className="car-img" alt="preview" />
+    
           
          
           <svg
@@ -197,15 +211,15 @@ function page() {
           </svg>
           <p className="ml-[73px]">126 likes</p>
           <div className="circle2"></div>
-          {description && (
+        
             <p className="ml-[53px] mt-[5px]">
             <a className="font-semibold">{localStorage.getItem('username')}</a>
-                  <a>{description}</a>
+                  <a>{item.desc}</a>
           </p>
-          )}
+        
           
         </div>
-     
+     ))}
         </>} 
         <div className="post-div">
           <div>
