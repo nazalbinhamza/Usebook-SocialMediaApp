@@ -1,8 +1,20 @@
+'use client';
 import React from 'react';
 import './forgot.css';
 import Link from 'next/link';
+import { toast } from 'react-hot-toast';
 
 function page() {
+
+  const VerifYHandle = ()=>{
+    toast(
+      "Check your sms then enter the pin code in there.",
+      {
+        duration: 5000,
+      }
+    );
+  }
+
   return (
     <div>
         <div style={{background:"white"}} className='h-[200]'>
@@ -23,7 +35,7 @@ function page() {
                 <button className='cancel-btn'>Cancel</button>
                 </Link>
                 <Link href={'/verify'}>
-                <button className='search-btn'>Search</button>
+                <button onClick={VerifYHandle} className='search-btn'>Search</button>
                 </Link>
                </form>
                </div>

@@ -4,12 +4,14 @@ import Link from 'next/link';
 import '../Home.css';
 import instance from '@/app/instance/instance';
 import './sidenav.css';
+import { toast } from 'react-hot-toast';
 
 
 function suggetion() {
 
   const [users, setUsers] = useState([]);
   const [userId,setUserId] = useState([]);
+  const [isFollow,setIsFollow]= useState(false)
   
 
   
@@ -40,13 +42,30 @@ function suggetion() {
       
       const res = await instance.put(`/user/${userId}/follow`, { _id: userid});
       console.log(res,'kkkkkkk');
-      
+      toast.success('Followed');
+      setIsFollow(true)
       
       setUserId(res.data);
     } catch (error) {
       console.error('Error fetching users:', error);
     }
   };
+
+  const unfollowUser = async (id:any)=>{
+
+    try {
+    let usrid:any = (localStorage.getItem("userid"));
+    const urId = id;
+
+    const res = await instance.put(`/user/${urId}/unfollow`,{ _id: usrid});
+    toast.error('Unfollowed');
+    setIsFollow(false)
+    setUserId(res.data);
+  } catch(error) {
+    console.error('Error fetching users:', error);
+  }
+
+  }
 
   
 
@@ -73,7 +92,9 @@ function suggetion() {
           <p className="ml-[120px] mt-[-35px] username-story font-semibold">{user.username}</p>
           <p className="ml-[120px] username-story text-gray-600">Followed by user + 1...</p>
           <div className=' float-right w-10 mr-10 mt-[-30px]'>
-          <button onClick={() => getUserId(user._id)} className="username-story font-semibold text-blue-600 ">follow</button>
+          <button onDoubleClick={()=> unfollowUser(user._id)} onClick={() => getUserId(user._id)} className="username-story font-semibold text-blue-600 ">
+            Follow
+          </button>
           </div>
           </div>
    ))}
