@@ -54,11 +54,10 @@ function page() {
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [post,setPost ]= useState<any>([])
-  
+  const [users, setUsers] = useState([]);
   const [like, setLike] = useState<any>(false);
-
   const [count,setCount] = useState(0);
-
+  const [comment,setComment] = useState('');
   const isEmpty = post === null;
 
 
@@ -125,6 +124,35 @@ function page() {
   };
 
 
+  // ************** Delete Post ******************
+
+
+  const deletePost = async(e:any)=>{
+    
+    try {
+      let usrid:any = (localStorage.getItem("userid"));
+  
+      const res = await instance.delete(`/posts/${usrid}`);
+      toast.error('Post Deleted');
+      
+    } catch(error) {
+      console.error('Error Deleting Post:', error);
+    }
+  }
+
+  // ****** Comment Function ***** //
+
+
+  const commentHandle = (e:any)=>{
+    e.preventDefault();
+    console.log(comment);
+    
+ 
+  }
+
+
+
+
   return (
     <div>
       <SidNav />
@@ -179,6 +207,7 @@ function page() {
       </Modal>
       {!isEmpty&&<>
          {post.map((item:any,index:any)=>(
+           
             <div className="post-div">
             <div className="post-bg pl-[-70px] pt-[20px]">
           <div>
@@ -190,6 +219,60 @@ function page() {
                 2s
               </span>
             </p>
+            {/* Delete Post */}
+
+      
+            <button onClick={deletePost} className="bin-button ml-[460px] mt-[-15px]">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 39 7"
+                className="bin-top"
+            >
+                <line stroke-width="4" stroke="white" y2="5" x2="39" y1="5"></line>
+                <line
+                stroke-width="3"
+                stroke="white"
+                y2="1.5"
+                x2="26.0357"
+                y1="1.5"
+                x1="12"
+                ></line>
+            </svg>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 33 39"
+                className="bin-bottom"
+            >
+                <mask fill="white" id="path-1-inside-1_8_19">
+                <path
+                    d="M0 0H33V35C33 37.2091 31.2091 39 29 39H4C1.79086 39 0 37.2091 0 35V0Z"
+                ></path>
+                </mask>
+                <path
+                mask="url(#path-1-inside-1_8_19)"
+                fill="white"
+                d="M0 0H33H0ZM37 35C37 39.4183 33.4183 43 29 43H4C-0.418278 43 -4 39.4183 -4 35H4H29H37ZM4 43C-0.418278 43 -4 39.4183 -4 35V0H4V35V43ZM37 0V35C37 39.4183 33.4183 43 29 43V35V0H37Z"
+                ></path>
+                <path stroke-width="4" stroke="white" d="M12 6L12 29"></path>
+                <path stroke-width="4" stroke="white" d="M21 6V29"></path>
+                </svg>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 89 80"
+                    className="garbage"
+                >
+                    <path
+                    fill="white"
+                    d="M20.5 10.5L37.5 15.5L42.5 11.5L51.5 12.5L68.75 0L72 11.5L79.5 12.5H88.5L87 22L68.75 31.5L75.5066 25L86 26L87 35.5L77.5 48L70.5 49.5L80 50L77.5 71.5L63.5 58.5L53.5 68.5L65.5 70.5L45.5 73L35.5 79.5L28 67L16 63L12 51.5L0 48L16 25L22.5 17L20.5 10.5Z"
+                    ></path>
+                </svg>
+              </button>
+           
+
+              {/*****End Delete Button*****/}
           </div>
         <div style={{borderRadius:'10px',width:'470px',height:'400px', backgroundImage: `url(${item.image})`, backgroundSize: 'cover', backgroundPosition: 'center',marginTop:'20px',marginLeft:'25px'}}></div>
           
@@ -239,9 +322,18 @@ function page() {
               d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"
             />
           </svg>
+          <form onSubmit={commentHandle}>
+          <input onChange={(e)=>setComment(e.target.value)} type="text" placeholder="Add Your Comment" className="mt-[60px] ml-[55px] h-[40px] w-[455px] border-2 border-gray-300 rounded-md pl-[20px] hover:border-black " />
+          <button type="submit" className="hover:bg-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-5 ml-[-30px] t-[10px]">
+               <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+            </svg>
+          </button>
+          </form>
           </div>
           </div>
         </div>
+
      ))}
         </>} 
       </div>

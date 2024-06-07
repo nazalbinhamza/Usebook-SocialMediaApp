@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import SidNav from '../Home/components/SidNav';
 import './prfl.css';
 import Box from '@mui/material/Box';
@@ -57,14 +57,42 @@ function a11yProps(index: number) {
   };
 }
 
+
+
 function page() {
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [password,setPassword] = useState('');
-
   const [value, setValue] = React.useState(0);
+  const [followers,setFollowers] = useState()
+  const [following,setFollowing] = useState()
+
+  let userid = localStorage.getItem('userid')
+
+    const fetchUser = async ()=>{
+      try{
+      const response = await instance.get(`/user/${userid}`)
+    const followersCount= (response.data.followers.length);
+    const followingsCount= (response.data.following.length);
+    console.log(followersCount,'followers');
+    
+    setFollowers(followersCount)
+    setFollowing(followingsCount)
+      }catch(error){
+        console.error('error');
+      }
+
+    }
+    useEffect(()=>{
+      fetchUser()
+
+    },[])
+
+
+
+
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -156,8 +184,8 @@ function page() {
           </Modal>
           {/* ********** */}
           <p className='ml-[450px] mt-[30px]'><span className='font-bold'>9</span> post</p>
-          <p className='ml-[535px] mt-[-24px]'><span className='font-bold'>257k</span> followers</p>
-          <p className='ml-[680px] mt-[-24px]'><span className='font-bold'>1798</span> following</p>
+          <p className='ml-[535px] mt-[-24px]'><span className='font-bold'>{followers}</span> followers</p>
+          <p className='ml-[680px] mt-[-24px]'><span className='font-bold'>{following}</span> following</p>
           <p className='ml-[450px] mt-[10px]'>🗽</p>
           <div className='highlight1-dp'>
             <div className='inner-1'></div>
