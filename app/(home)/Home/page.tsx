@@ -91,11 +91,6 @@ function page() {
        const response = await instance.get(`./posts/${userid}/timeline`)
        if (response.status==200){
          setPost(response.data)
-         let posttId = response.data;
-         posttId.map((x:any)=>{
-          let newpostId = x._id;
-          localStorage.setItem('idpost',newpostId)
-         })
        }
      } catch (error) {
        console.log(error)
