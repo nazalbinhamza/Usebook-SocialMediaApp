@@ -111,41 +111,51 @@ function page() {
     }
   };
 
-  // // ************* Like Post *****************
 
-  // const fetchLike = async (id:any)=>{
-  //   const usernteid = localStorage.getItem('userid')
-  //   const datas = {
-  //     userId: usernteid
-  //   }
-  //   try{
-  //   const response = await instance.put(/posts/${id}/like,{...datas})
-  //   if(response.status === 200){
+  
+ // // ************* Like Post *****************
 
-  //     const updatedLikes = post.map((item: any) => {
-  //       if (item._id === id) {
-  //         return {
-  //           ...item,
-  //           likes : response.data.likes
-  //         };
-  //       }
-  //       return item;
-  //     });
-  //     setPost(updatedLikes);
-  //     toast.success('liked')
+  const fetchLike = async (id:any)=>{
+    const usernteid = localStorage.getItem('userid')
+    const datas = {
+      userId: usernteid
+    }
+    try{
+    const response = await instance.put(`/posts/${id}/like`,{...datas})
+    if(response.status === 200){
+      if(like){
+        setLike(false)
+        setCount(count-1)
+      }else{
+        setLike(true)
+        setCount(count+1)
+      }
+
+      const updatedLikes = post.map((item: any) => {
+        if (item._id === id) {
+          return {
+            ...item,
+            likes : response.data.likes
+          };
+        }
+        return item;
+      });
+      setPost(updatedLikes);
+      toast.success('liked')
       
-  //   }
-  // }catch(error){
-  //   toast.error('something error')
-  //   console.error('error like : ',error)
+    }
+  }catch(error){
+    toast.error('something error')
+    console.error('error like : ',error)
     
-  // }
-  // }
+  }
+  }
  
 
 
 
   // ************** Delete Post ******************
+
 
 
   const deletePost = async(id: string)=>{
@@ -330,16 +340,7 @@ function page() {
           
         <div className="ml-[-25px]">
           <svg
-            onClick={() => {
-              if(like){
-                setLike(false)
-                setCount(count-1)
-              }else{
-                setLike(true)
-                setCount(count+1)
-              }
-              // like ? setLike(false) : setLike(true), setCount(count+1);
-            }}
+            onClick={()=>fetchLike(item._id)}
             xmlns="http://www.w3.org/2000/svg"
             fill={!like ? "none" : "red"}
             viewBox="0 0 24 24"
