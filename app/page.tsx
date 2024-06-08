@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./page.css";
 import Link from "next/link";
 import axios from "axios";
@@ -16,28 +16,31 @@ export default function Home() {
         "https://social-media-5ukj.onrender.com/auth/login",
         { email: email, password: password }
       );
-      if (email == email) {
-        localStorage.setItem("role", "user");
-        const item = await axios.get(
-          "https://social-media-5ukj.onrender.com/user/"
-        );
-        let x = item.data;
+      if (response.data.token) {
+        if (typeof window !== 'undefined') {
+          localStorage.setItem("role", "user");
+          localStorage.setItem("token", response.data.token);
+          
+          const item = await axios.get("https://social-media-5ukj.onrender.com/user/");
+          let x = item.data;
 
-        const users = x.find((value: any) => value.email == email);
+          const users = x.find((value: any) => value.email == email);
+          if (users) {
+            localStorage.setItem("userid", users._id);
+            localStorage.setItem("username", users.username);
+          }
 
-        localStorage.setItem("userid", users._id);
-        localStorage.setItem("username", users.username);
+          toast.success("Login Successfully");
+          setTimeout(() => {
+            window.location.href = "/Home";
+          }, 500);
+        }
       } else {
         toast.error("Invalid email or password");
       }
-      localStorage.setItem("token", response.data.token);
-      setTimeout(() => {
-        window.location.href = "/Home";
-      }, 500);
-      console.log(response);
-      toast.success("Login Successfully");
     } catch (error) {
       console.log(error);
+      toast.error("An error occurred. Please try again.");
     }
   };
 
@@ -60,7 +63,6 @@ export default function Home() {
               placeholder="Passwords"
               className="pass-inp"
             />
-            {/* <button onClick={handleClick} className='log-inp'>Log in</button> */}
             <button
               onClick={handleClick}
               className="pushable ml-[59px] mt-[40px]"
@@ -86,7 +88,7 @@ export default function Home() {
               Create a Page
             </Link>{" "}
           </span>
-          for a celebrity,brand or business.
+          for a celebrity, brand or business.
         </h6>
         <div style={{ display: "flex", justifyContent: "left" }}>
           <img className="usebook-img" src="logo.png" alt="" />
