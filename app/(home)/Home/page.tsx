@@ -63,7 +63,7 @@ function page() {
   };
 
   let userid:any = (localStorage.getItem("userid"))
-  const handleApi = async (post:any) => {  
+  const handleApi = async (post: File) => {  
     let userid:any = (localStorage.getItem("userid"))
     
    
@@ -110,6 +110,37 @@ function page() {
       handleClose(); 
     }
   };
+
+  // // ************* Like Post *****************
+
+  // const fetchLike = async (id:any)=>{
+  //   const usernteid = localStorage.getItem('userid')
+  //   const datas = {
+  //     userId: usernteid
+  //   }
+  //   try{
+  //   const response = await instance.put(/posts/${id}/like,{...datas})
+  //   if(response.status === 200){
+
+  //     const updatedLikes = post.map((item: any) => {
+  //       if (item._id === id) {
+  //         return {
+  //           ...item,
+  //           likes : response.data.likes
+  //         };
+  //       }
+  //       return item;
+  //     });
+  //     setPost(updatedLikes);
+  //     toast.success('liked')
+      
+  //   }
+  // }catch(error){
+  //   toast.error('something error')
+  //   console.error('error like : ',error)
+    
+  // }
+  // }
  
 
 
@@ -117,7 +148,7 @@ function page() {
   // ************** Delete Post ******************
 
 
-  const deletePost = async(id:any)=>{
+  const deletePost = async(id: string)=>{
     
     
     try {
@@ -139,7 +170,7 @@ function page() {
   // ****** Comment Function ***** //
 
 
-  const commentHandle = async (id:any)=>{
+  const commentHandle = async (id: string)=>{
    
     
     try {
@@ -227,9 +258,9 @@ function page() {
         </Fade>
       </Modal>
       {!isEmpty&&<>
-         {post && post.map((item:any,index:any)=>(
+         {post.map((item:any,index:any)=>(
            
-            <div className="post-div">
+            <div key={item._id} className="post-div">
             <div className="post-bg pl-[-70px] pt-[20px]">
           <div>
             <div className="circle1"></div>
@@ -250,9 +281,9 @@ function page() {
                 viewBox="0 0 39 7"
                 className="bin-top"
             >
-                <line stroke-width="4" stroke="white" y2="5" x2="39" y1="5"></line>
+                <line strokeWidth="4" stroke="white" y2="5" x2="39" y1="5"></line>
                 <line
-                stroke-width="3"
+                strokeWidth="3"
                 stroke="white"
                 y2="1.5"
                 x2="26.0357"
@@ -276,8 +307,8 @@ function page() {
                 fill="white"
                 d="M0 0H33H0ZM37 35C37 39.4183 33.4183 43 29 43H4C-0.418278 43 -4 39.4183 -4 35H4H29H37ZM4 43C-0.418278 43 -4 39.4183 -4 35V0H4V35V43ZM37 0V35C37 39.4183 33.4183 43 29 43V35V0H37Z"
                 ></path>
-                <path stroke-width="4" stroke="white" d="M12 6L12 29"></path>
-                <path stroke-width="4" stroke="white" d="M21 6V29"></path>
+                <path strokeWidth="4" stroke="white" d="M12 6L12 29"></path>
+                <path strokeWidth="4" stroke="white" d="M21 6V29"></path>
                 </svg>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -312,13 +343,13 @@ function page() {
             xmlns="http://www.w3.org/2000/svg"
             fill={!like ? "none" : "red"}
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
             className="w-6 h-6  ml-[53px] mt-[10px]"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
             />
           </svg>
@@ -333,20 +364,20 @@ function page() {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
             className="w-6 h-6  ml-[90px] mt-[-71px]"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+             strokeLinecap="round"
+              strokeLinejoin="round"
               d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"
             />
           </svg>
           <input onChange={(e)=>setComment(e.target.value)} value={comment} type="text" placeholder="Add Your Comment" className="mt-[60px] ml-[55px] h-[40px] w-[455px] border-2 border-gray-300 rounded-md pl-[20px] hover:border-black " />
           <button onClick={()=>commentHandle(item._id)} className="hover:bg-gray-200">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-5 ml-[-30px] t-[10px]">
-               <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-5 ml-[-30px] t-[10px]">
+               <path strokeLinecap="round" strokeLinejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
             </svg>
           </button>
           </div>
