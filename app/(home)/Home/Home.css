@@ -81,14 +81,14 @@
 }
 .post-div{
     width: 550px;
-    height: 690px;
+    height: 720px;
     margin-top: 40px;
     margin-left: 95px;
     border-bottom: 1px solid grey;
 }
 .post-bg{
     width: 520px;
-    height: 655px;
+    height: 685px;
     margin-left: 15px;
     background-color: whitesmoke;
     border-radius: 20px;
@@ -173,7 +173,7 @@ body{
     width: 45px ;
     height: 45px ;
     border-radius: 100px 100px 100px 100px ;
-    background-image: url('data:image/png;base64,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');
+    background-image: url('https://i0.wp.com/www.stignatius.co.uk/wp-content/uploads/2020/10/default-user-icon.jpg?fit=415%2C415&ssl=1');
     background-size: cover;
     background-position: center;
     margin-top: 35px;

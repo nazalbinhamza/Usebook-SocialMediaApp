@@ -38,10 +38,8 @@ function suggetion() {
     try {
       let userid:any = (localStorage.getItem("userid"))
       const userId = id;
-      console.log(userId,'hhh');
       
       const res = await instance.put(`/user/${userId}/follow`, { _id: userid});
-      console.log(res,'kkkkkkk');
       toast.success('Followed');
       setIsFollow(true)
       

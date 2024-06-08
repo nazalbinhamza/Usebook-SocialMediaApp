@@ -14,17 +14,6 @@ import TextField from '@mui/material/TextField';
 import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
 
-// const style = {
-//   position: "absolute" as "absolute",
-//   top: "50%",
-//   left: "50%",
-//   transform: "translate(-50%, -50%)",
-//   width: 400,
-//   bgcolor: "background.paper",
-//   border: "2px solid #000",
-//   boxShadow: 24,
-//   p: 4,
-// };
 
 const style = {
   position: 'absolute',
@@ -53,8 +42,7 @@ function page() {
   const [selectFile, setSelectFile] = useState(null);
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-  const [post,setPost ]= useState<any>([])
-  const [users, setUsers] = useState([]);
+  const [post,setPost ]= useState<any>([]);
   const [like, setLike] = useState<any>(false);
   const [count,setCount] = useState(0);
   const [comment,setComment] = useState('');
@@ -96,13 +84,18 @@ function page() {
 
   };
 
+
   useEffect(()=>{
     const fetchData = async ()=>{
      try {
        const response = await instance.get(`./posts/${userid}/timeline`)
        if (response.status==200){
          setPost(response.data)
-         
+         let posttId = response.data;
+         posttId.map((x:any)=>{
+          let newpostId = x._id;
+          localStorage.setItem('idpost',newpostId)
+         })
        }
      } catch (error) {
        console.log(error)
@@ -122,19 +115,27 @@ function page() {
       handleClose(); 
     }
   };
+ 
+
 
 
   // ************** Delete Post ******************
 
 
-  const deletePost = async(e:any)=>{
+  const deletePost = async(id:any)=>{
+    
     
     try {
       let usrid:any = (localStorage.getItem("userid"));
-  
-      const res = await instance.delete(`/posts/${usrid}`);
-      toast.error('Post Deleted');
+      let data = {
+        userId : usrid
+      }
       
+      const response = await instance.delete(`/posts/${id}`,{data});
+      if (response.status==200){
+        setPost((prevPosts: any[]) => prevPosts.filter(post => post._id !== id));
+        toast.error('Post Deleted');
+      }
     } catch(error) {
       console.error('Error Deleting Post:', error);
     }
@@ -143,11 +144,36 @@ function page() {
   // ****** Comment Function ***** //
 
 
-  const commentHandle = (e:any)=>{
-    e.preventDefault();
-    console.log(comment);
+  const commentHandle = async (id:any)=>{
+   
     
- 
+    try {
+      let usrid:any = (localStorage.getItem("userid"));
+      let data = {
+        userId : usrid,
+        text : comment
+      }
+      
+      const response = await instance.post(`/posts/${id}/comment`,{...data});
+      if (response.status==200){
+        const updatedPosts = post.map((item: any) => {
+          if (item._id === id) {
+            return {
+              ...item,
+              comments: response.data.comments
+            };
+          }
+          return item;
+        });
+
+        setPost(updatedPosts);
+        setComment('')
+        toast.success('Commented');
+      }
+    } catch(error) {
+      console.error('CommentError:', error);
+    }
+
   }
 
 
@@ -206,7 +232,7 @@ function page() {
         </Fade>
       </Modal>
       {!isEmpty&&<>
-         {post.map((item:any,index:any)=>(
+         {post && post.map((item:any,index:any)=>(
            
             <div className="post-div">
             <div className="post-bg pl-[-70px] pt-[20px]">
@@ -222,7 +248,7 @@ function page() {
             {/* Delete Post */}
 
       
-            <button onClick={deletePost} className="bin-button ml-[460px] mt-[-15px]">
+            <button onClick={()=>deletePost(item._id)} className="bin-button ml-[460px] mt-[-15px]">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -322,14 +348,12 @@ function page() {
               d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"
             />
           </svg>
-          <form onSubmit={commentHandle}>
-          <input onChange={(e)=>setComment(e.target.value)} type="text" placeholder="Add Your Comment" className="mt-[60px] ml-[55px] h-[40px] w-[455px] border-2 border-gray-300 rounded-md pl-[20px] hover:border-black " />
-          <button type="submit" className="hover:bg-gray-200">
+          <input onChange={(e)=>setComment(e.target.value)} value={comment} type="text" placeholder="Add Your Comment" className="mt-[60px] ml-[55px] h-[40px] w-[455px] border-2 border-gray-300 rounded-md pl-[20px] hover:border-black " />
+          <button onClick={()=>commentHandle(item._id)} className="hover:bg-gray-200">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-5 ml-[-30px] t-[10px]">
                <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
             </svg>
           </button>
-          </form>
           </div>
           </div>
         </div>
