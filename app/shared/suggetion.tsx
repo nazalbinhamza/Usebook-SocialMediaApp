@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import '../Home.css';
+import '../(home)/Home/Home.css';
 import instance from '@/app/instance/instance';
 import './sidenav.css';
 import { toast } from 'react-hot-toast';

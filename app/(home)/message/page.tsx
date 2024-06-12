@@ -1,8 +1,8 @@
 "use client";
 import React from 'react';
 import './message.css';
-import SindNav from '../Home/components/SidNav';
-import Suggetion from '../Home/components/suggetion';
+import SindNav from '../../shared/SidNav';
+import Suggetion from '../../shared/suggetion';
 
 function page() {
   return (

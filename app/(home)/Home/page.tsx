@@ -1,9 +1,9 @@
 "use client";
 import React, { useState,useRef,useEffect } from "react";
 import "./Home.css";
-import SidNav from "./components/SidNav";
-import StoryNav from "./components/StoryNav";
-import Suggetion from "./components/suggetion";
+import SidNav from "../../shared/SidNav";
+import StoryNav from "../../shared/StoryNav";
+import Suggetion from "../../shared/suggetion";
 import { toast } from 'react-hot-toast';
 import instance from "@/app/instance/instance";
 import Box from '@mui/material/Box';
@@ -14,6 +14,14 @@ import TextField from '@mui/material/TextField';
 import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
 
+
+interface Post {
+  _id: string;
+  image: string;
+  desc: string;
+  likes: number;
+  comments: string[];
+}
 
 const style = {
   position: 'absolute',
@@ -35,26 +43,25 @@ const buttonStyle = {
   justifyContent: 'center'
 };
 
-function page() {
-
+function Page() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState(false);
-  const [selectFile, setSelectFile] = useState(null);
+  const [selectFile, setSelectFile] = useState<File | null>(null);
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-  const [post,setPost ]= useState<any>([]);
-  const [like, setLike] = useState<any>(false);
-  const [count,setCount] = useState(0);
-  const [comment,setComment] = useState('');
-  const isEmpty = post === null;
+  const [post, setPost] = useState<Post[]>([]);
+  const [like, setLike] = useState<boolean>(false);
+  const [count, setCount] = useState(0);
+  const [comment, setComment] = useState('');
 
+  const isEmpty = post.length === 0;
 
- 
+  const userid = localStorage.getItem("userid");
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  
-  const handleFile = (e:any) => {
+  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setSelectFile(e.target.files[0]);
     } else {
@@ -62,15 +69,11 @@ function page() {
     }
   };
 
-  let userid:any = (localStorage.getItem("userid"))
-  const handleApi = async (post: File) => {  
-    let userid:any = (localStorage.getItem("userid"))
-    
-   
+  const handleApi = async (post: File) => {
     const formData = new FormData();
     formData.append('file', post);
     formData.append('desc', description);
-    formData.append('userId', userid);
+    formData.append('userId', userid || "");
     try {
       const response = await instance.post('/createPost', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
@@ -81,136 +84,101 @@ function page() {
     } catch (error) {
       console.error('Error creating post:', error);
     }
-
   };
 
-
-  useEffect(()=>{
-    const fetchData = async ()=>{
-     try {
-       const response = await instance.get(`./posts/${userid}/timeline`)
-       if (response.status==200){
-         setPost(response.data)
-       }
-     } catch (error) {
-       console.log(error)
-     }
-     
-    }
-    fetchData()
- 
-   },[])
-
-  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await instance.get(`./posts/${userid}/timeline`);
+        if (response.status === 200) {
+          setPost(response.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const addPost = () => {
     if (selectFile) {
-      handleApi(selectFile);   
-  
-      handleClose(); 
+      handleApi(selectFile);
+      handleClose();
     }
   };
 
-
-  
- // // ************* Like Post *****************
-
-  const fetchLike = async (id:any)=>{
-    const usernteid = localStorage.getItem('userid')
+  const fetchLike = async (id: string) => {
+    const usernteid = localStorage.getItem('userid');
     const datas = {
       userId: usernteid
-    }
-    try{
-    const response = await instance.put(`/posts/${id}/like`,{...datas})
-    if(response.status === 200){
-      if(like){
-        setLike(false)
-        setCount(count-1)
-      }else{
-        setLike(true)
-        setCount(count+1)
-      }
-
-      const updatedLikes = post.map((item: any) => {
-        if (item._id === id) {
-          return {
-            ...item,
-            likes : response.data.likes
-          };
-        }
-        return item;
-      });
-      setPost(updatedLikes);
-      toast.success('liked')
-      
-    }
-  }catch(error){
-    toast.error('something error')
-    console.error('error like : ',error)
-    
-  }
-  }
- 
-
-
-
-  // ************** Delete Post ******************
-
-
-
-  const deletePost = async(id: string)=>{
-    
-    
+    };
     try {
-      let usrid:any = (localStorage.getItem("userid"));
-      let data = {
-        userId : usrid
-      }
-      
-      const response = await instance.delete(`/posts/${id}`,{data});
-      if (response.status==200){
-        setPost((prevPosts: any[]) => prevPosts.filter(post => post._id !== id));
-        toast.error('Post Deleted');
-      }
-    } catch(error) {
-      console.error('Error Deleting Post:', error);
-    }
-  }
+      const response = await instance.put(`/posts/${id}/like`, { ...datas });
+      if (response.status === 200) {
+        setLike(!like);
+        setCount(response.data.likes);
 
-  // ****** Comment Function ***** //
-
-
-  const commentHandle = async (id: string)=>{
-   
-    
-    try {
-      let usrid:any = (localStorage.getItem("userid"));
-      let data = {
-        userId : usrid,
-        text : comment
-      }
-      
-      const response = await instance.post(`/posts/${id}/comment`,{...data});
-      if (response.status==200){
-        const updatedPosts = post.map((item: any) => {
+        const updatedLikes = post.map((item: Post) => {
           if (item._id === id) {
             return {
               ...item,
-              comments: response.data.comments
+              likes: response.data.likes
+            };
+          }
+          return item;
+        });
+        setPost(updatedLikes);
+        toast.success('liked');
+      }
+    } catch (error) {
+      toast.error('something error');
+      console.error('error like : ', error);
+    }
+  };
+
+  const deletePost = async (id: string) => {
+    try {
+      const usrid = localStorage.getItem("userid") || "";
+      const data = {
+        userId: usrid
+      };
+      const response = await instance.delete(`/posts/${id}`, { data });
+      if (response.status === 200) {
+        setPost((prevPosts: Post[]) => prevPosts.filter(post => post._id !== id));
+        toast.error('Post Deleted');
+      }
+    } catch (error) {
+      console.error('Error Deleting Post:', error);
+    }
+  };
+
+  const commentHandle = async (id: string) => {
+    try {
+      const usrid = localStorage.getItem("userid") || "";
+      const data = {
+        userId: usrid,
+        text: comment
+      };
+      const response = await instance.post(`/posts/${id}/comment`, { ...data });
+      if (response.status === 200) {
+        const updatedPosts = post.map((item: Post) => {
+          if (item._id === id) {
+            return {
+              ...item,
+              comments: [...item.comments, comment]
             };
           }
           return item;
         });
 
         setPost(updatedPosts);
-        setComment('')
+        setComment('');
         toast.success('Commented');
       }
-    } catch(error) {
+    } catch (error) {
       console.error('CommentError:', error);
     }
-
-  }
+  };
 
 
 
@@ -392,4 +360,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

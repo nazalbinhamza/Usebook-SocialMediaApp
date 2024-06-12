@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
-import SindNav from '../Home/components/SidNav';
-import Suggetion from '../Home/components/suggetion';
+import SindNav from '../../shared/SidNav';
+import Suggetion from '../../shared/suggetion';
 import './create.css';
 import { toast } from 'react-hot-toast';
 import instance from '@/app/instance/instance';
