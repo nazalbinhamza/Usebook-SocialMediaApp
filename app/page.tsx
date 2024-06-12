@@ -72,10 +72,10 @@ export default function Home() {
               <span className="front">Log in</span>
             </button>
           </form>
-          <Link href={"/forgot"}>
+          <Link href={"/Forgot"}>
             <h6 className="forgotten">Forgotten password?</h6>
           </Link>
-          <Link href={"/sign"}>
+          <Link href={"/Sign"}>
             <button className="new-acc">Create new account</button>
           </Link>
         </div>

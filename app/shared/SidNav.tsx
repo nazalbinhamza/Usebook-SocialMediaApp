@@ -33,7 +33,7 @@ function SindNav() {
         >
           <path d="M 21 3 C 11.601563 3 4 10.601563 4 20 C 4 29.398438 11.601563 37 21 37 C 24.355469 37 27.460938 36.015625 30.09375 34.34375 L 42.375 46.625 L 46.625 42.375 L 34.5 30.28125 C 36.679688 27.421875 38 23.878906 38 20 C 38 10.601563 30.398438 3 21 3 Z M 21 7 C 28.199219 7 34 12.800781 34 20 C 34 27.199219 28.199219 33 21 33 C 13.800781 33 8 27.199219 8 20 C 8 12.800781 13.800781 7 21 7 Z"></path>
         </svg>
-        <Link href={"/search"}>
+        <Link href={"/Search"}>
           <h5 className="cursor-pointer font-semibold search-text">Search</h5>
         </Link>
         <svg
@@ -52,7 +52,7 @@ function SindNav() {
             d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z"
           />
         </svg>
-        <Link href={"/message"}>
+        <Link href={"/Message"}>
           <h5 className="cursor-pointer font-semibold message-text">
             Messages
           </h5>
@@ -71,7 +71,7 @@ function SindNav() {
             d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
           />
         </svg>
-        <Link href={"/create"}>
+        <Link href={"/Create"}>
           <h5 className="cursor-pointer font-semibold notification-text">
             Create
           </h5>
@@ -92,7 +92,7 @@ function SindNav() {
             d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
           />
         </svg>
-        <Link href="/profile">
+        <Link href="/Profile">
           <h5 className="cursor-pointer font-semibold profile-text">Profile</h5>
         </Link>
         <svg
@@ -109,7 +109,7 @@ function SindNav() {
             d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25"
           />
         </svg>
-        <Link href={'/sign'}>
+        <Link href={'/Sign'}>
         <h5 className="cursor-pointer font-semibold help-text">Log out</h5>
         </Link>
         <svg

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState,useRef,useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./Home.css";
 import SidNav from "../../shared/SidNav";
 import StoryNav from "../../shared/StoryNav";
@@ -13,7 +13,6 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
-
 
 interface Post {
   _id: string;
@@ -56,7 +55,17 @@ function Page() {
 
   const isEmpty = post.length === 0;
 
-  const userid = localStorage.getItem("userid");
+  // State to store userId and username
+  const [userId, setUserId] = useState<string | null>(null);
+  const [username, setUsername] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Check if running in the browser and set userId and username
+    if (typeof window !== 'undefined') {
+      setUserId(localStorage.getItem("userid"));
+      setUsername(localStorage.getItem("username"));
+    }
+  }, []);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -73,7 +82,7 @@ function Page() {
     const formData = new FormData();
     formData.append('file', post);
     formData.append('desc', description);
-    formData.append('userId', userid || "");
+    formData.append('userId', userId || "");
     try {
       const response = await instance.post('/createPost', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
@@ -89,7 +98,7 @@ function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await instance.get(`./posts/${userid}/timeline`);
+        const response = await instance.get(`./posts/${userId}/timeline`);
         if (response.status === 200) {
           setPost(response.data);
         }
@@ -97,8 +106,10 @@ function Page() {
         console.log(error);
       }
     };
-    fetchData();
-  }, []);
+    if (userId) {
+      fetchData();
+    }
+  }, [userId]);
 
   const addPost = () => {
     if (selectFile) {
@@ -108,11 +119,10 @@ function Page() {
   };
 
   const fetchLike = async (id: string) => {
-    const usernteid = localStorage.getItem('userid');
-    const datas = {
-      userId: usernteid
-    };
     try {
+      const datas = {
+        userId: userId
+      };
       const response = await instance.put(`/posts/${id}/like`, { ...datas });
       if (response.status === 200) {
         setLike(!like);
@@ -138,9 +148,8 @@ function Page() {
 
   const deletePost = async (id: string) => {
     try {
-      const usrid = localStorage.getItem("userid") || "";
       const data = {
-        userId: usrid
+        userId: userId
       };
       const response = await instance.delete(`/posts/${id}`, { data });
       if (response.status === 200) {
@@ -154,9 +163,8 @@ function Page() {
 
   const commentHandle = async (id: string) => {
     try {
-      const usrid = localStorage.getItem("userid") || "";
       const data = {
-        userId: usrid,
+        userId: userId,
         text: comment
       };
       const response = await instance.post(`/posts/${id}/comment`, { ...data });
@@ -179,8 +187,6 @@ function Page() {
       console.error('CommentError:', error);
     }
   };
-
-
 
 
   return (

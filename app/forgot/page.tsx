@@ -34,7 +34,7 @@ function page() {
                 <Link href={'/'}>
                 <button className='cancel-btn'>Cancel</button>
                 </Link>
-                <Link href={'/verify'}>
+                <Link href={'/Verify'}>
                 <button onClick={VerifYHandle} className='search-btn'>Search</button>
                 </Link>
                </form>
