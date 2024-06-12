@@ -59,13 +59,10 @@ function Page() {
   const [userId, setUserId] = useState<string | null>(null);
   const [username, setUsername] = useState<string | null>(null);
 
-  useEffect(() => {
-    // Check if running in the browser and set userId and username
-    if (typeof window !== 'undefined') {
-      setUserId(localStorage.getItem("userid"));
-      setUsername(localStorage.getItem("username"));
-    }
-  }, []);
+      const userid = typeof localStorage !== 'undefined' ? localStorage.getItem("userid") : null;
+      
+      setUsername(typeof localStorage !== 'undefined' ? localStorage.getItem("username") : null);
+
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

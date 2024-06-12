@@ -69,8 +69,9 @@ function Page() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setUserId(localStorage.getItem('userid'));
-      setUsername(localStorage.getItem('username'));
+      
+      setUserId(typeof localStorage !== 'undefined' ? localStorage.getItem("userid") : null);
+      setUsername(typeof localStorage !== 'undefined' ? localStorage.getItem("username") : null);
     }
   }, []);
 

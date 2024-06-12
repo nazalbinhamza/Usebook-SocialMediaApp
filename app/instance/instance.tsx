@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const adminToken = localStorage.getItem('token')
+const adminToken = typeof localStorage !== 'undefined' ? localStorage.getItem("token") : null
 
 const instance = axios.create({
   baseURL:  process.env.NEXT_PUBLIC_HOST_URL

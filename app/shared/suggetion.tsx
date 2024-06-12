@@ -31,7 +31,7 @@ function Suggetion() {
 
   const getUserId = async (id:any) => {
     try {
-      let userid = localStorage.getItem("userid");
+      let userid = typeof localStorage !== 'undefined' ? localStorage.getItem("userid") : null
       const userId = id;
       
       const res = await instance.put(`/user/${userId}/follow`, { _id: userid });
@@ -45,7 +45,7 @@ function Suggetion() {
 
   const unfollowUser = async (id:any) => {
     try {
-      let usrid = localStorage.getItem("userid");
+      let usrid = typeof localStorage !== 'undefined' ? localStorage.getItem("userid") : null
       const urId = id;
 
       const res = await instance.put(`/user/${urId}/unfollow`, { _id: usrid });
