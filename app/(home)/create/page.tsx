@@ -13,7 +13,7 @@ function Page() {
   useEffect(() => {
     // Ensure this code runs only on the client side
     if (typeof window !== "undefined") {
-      const storedUserId = typeof localStorage !== 'undefined' ? localStorage.getItem("userid") : null;
+      const storedUserId = localStorage.getItem("userid");
       if (storedUserId) {
         setUserId(storedUserId);
       }

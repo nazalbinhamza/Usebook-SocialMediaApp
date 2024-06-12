@@ -59,10 +59,12 @@ function Page() {
   const [userId, setUserId] = useState<string | null>(null);
   const [username, setUsername] = useState<string | null>(null);
 
-      const userid = typeof localStorage !== 'undefined' ? localStorage.getItem("userid") : null;
-      
-      setUsername(typeof localStorage !== 'undefined' ? localStorage.getItem("username") : null);
-
+  useEffect(() => {
+    const userid = typeof localStorage !== 'undefined' ? localStorage.getItem("userid") : null;
+    setUserId(userid);
+    const username = typeof localStorage !== 'undefined' ? localStorage.getItem("username") : null;
+    setUsername(username);
+  }, []);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
