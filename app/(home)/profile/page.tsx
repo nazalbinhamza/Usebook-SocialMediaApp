@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import SidNav from '../../shared/SidNav';
 import './prfl.css';
 import Box from '@mui/material/Box';
@@ -7,9 +7,9 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { Button } from '@mui/material';
 import instance from '@/app/instance/instance';
 import { toast } from 'react-hot-toast';
+import { GlobalContext } from "@/app/globalContext/context";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -66,6 +66,8 @@ function Page() {
   const [following, setFollowing] = useState<number | undefined>();
   const [userId, setUserId] = useState<string | null>(null);
   const [username, setUsername] = useState<string | null>(null);
+
+  const  { post, setPost} = useContext<any>(GlobalContext);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -214,8 +216,28 @@ function Page() {
         <div className="highlight3-dp">
           <div className="inner-3"></div>
         </div>
+        <div className="mt-20 w-[900px] ml-[200px]">
+            <div
+              style={{ borderTop: "1px solid #333" }}
+              className="w-1/1 h-10  flex items-center ml-[-120px]"
+            >
+              <h1 className=" text-black ml-[480px] text-[19px]">POSTS</h1>
+            </div>
+            {post.map((item: any, index: any) => (
+              <div
+                key={index}
+                style={{
+                  border: "2px solid black",
+                  backgroundImage: `url(${item.image})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+                className=" float-left w-64 h-64 "
+              ></div>
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
   );
 }
 

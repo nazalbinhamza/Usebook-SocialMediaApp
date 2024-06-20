@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect, useContext,ChangeEvent } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import "./Home.css";
 import SidNav from "../../shared/SidNav";
 import StoryNav from "../../shared/StoryNav";
