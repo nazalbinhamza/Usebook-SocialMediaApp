@@ -222,7 +222,7 @@ body {
   
   }
 
-  @media only screen and (min-width: 501px) and (max-width: 1024px){
+  @media screen and (max-width:687px){
     .usebook-img{
       width: 250px;
       height: 40px;
