@@ -7,7 +7,6 @@ import { toast } from 'react-hot-toast';
 import instance from '@/app/instance/instance';
 
 function Page() {
-  const [post, setPost] = useState<any>([]);
   const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -27,13 +26,13 @@ function Page() {
       toast.error('User ID not found');
       return;
     }
-
+    
     try {
       const formData = new FormData();
       formData.append('file', selectedFile);
       formData.append('desc', 'something');
       formData.append('userId', userId);
-
+    
       const response = await instance.post('/createPost', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'

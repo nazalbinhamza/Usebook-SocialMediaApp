@@ -96,3 +96,12 @@
     margin-left: 105px;
     margin-top: -23px;
 }
+
+@media screen and (max-width:736px){
+    .side-nav{
+       display: none;
+    }
+    .suggetion-div{
+        display: none;
+    }
+}

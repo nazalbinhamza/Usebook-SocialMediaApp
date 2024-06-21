@@ -95,21 +95,6 @@ const Page = ()=> {
     }
   };
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await instance.get(`./posts/${userId}/timeline`);
-  //       if (response.status === 200) {
-  //         setPost(response.data);
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   if (userId) {
-  //     fetchData();
-  //   }
-  // }, [userId]);
 
   const addPost = () => {
     if (selectFile) {
@@ -195,9 +180,9 @@ const Page = ()=> {
       <div className="post-section float-right">
         <StoryNav />
 
-        <div className="h-[80px] w-[620px] ml-[55px] mt-[30px] border-2 border-gray-400 rounded-md pl-[190px] pt-[20px] bg-white">
+        <div className="new-post h-[80px] w-[620px] ml-[55px] mt-[30px] border-2 border-gray-400 rounded-md pl-[190px] pt-[20px] bg-white">
           <button
-            className="border-2 border-gray-400 rounded-xl w-[250px] h-[40px] text-[12px]"
+            className="border-2 border-gray-400 rounded-xl w-[250px] h-[40px] text-[12px] post-btn"
             onClick={handleOpen}
           >
             Start a post, try writing with AI
@@ -353,6 +338,7 @@ const Page = ()=> {
                       marginTop: "20px",
                       marginLeft: "25px",
                     }}
+                    className="img-post"
                   ></div>
 
                   <div className="ml-[-25px]">
@@ -399,7 +385,7 @@ const Page = ()=> {
                       value={comment}
                       type="text"
                       placeholder="Add Your Comment"
-                      className="mt-[60px] ml-[55px] h-[40px] w-[455px] border-2 border-gray-300 rounded-md pl-[20px] hover:border-black "
+                      className="cmnt-inp mt-[60px] ml-[55px] h-[40px] w-[455px] border-2 border-gray-300 rounded-md pl-[20px] hover:border-black "
                     />
                     <button
                       onClick={() => commentHandle(item._id)}

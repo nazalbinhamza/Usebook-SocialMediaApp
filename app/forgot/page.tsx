@@ -19,9 +19,9 @@ function page() {
     <div>
         <div style={{background:"white"}} className='h-[200]'>
             <br />
-            <img style={{height:"35px",width:"250px"}} className='ml-12' src='logo.png'/><br />
+            <img style={{height:"35px",width:"250px"}} className='ml-12 logo-img' src='logo.png'/><br />
         </div>
-        <div>
+        <div className='out-div'>
             
             <div className='find-box shadow-lg bg-white-900'>
                <img src='forgot.png' className='forgot-img'/>

@@ -62,7 +62,7 @@ function page() {
           </div>
 
               <div>
-                <img style={{top:'340px'}} className='h-[300px] absolute left-72' src='sticky.png' />
+                <img style={{top:'340px'}} className='h-[300px] absolute left-72 stick-img' src='sticky.png' />
               </div>
         
       </div>

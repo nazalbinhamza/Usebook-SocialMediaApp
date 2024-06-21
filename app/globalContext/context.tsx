@@ -32,32 +32,6 @@ const GlobalProvider = ({ children }: { children: ReactNode }) => {
     setUsername(username);
   }, []);
 
-//   const handleApi = async (post: File) => {
-//     const formData = new FormData();
-//     formData.append('file', post);
-//     formData.append('desc', description);
-//     formData.append('userId', userId || "");
-//     try {
-//       const response = await instance.post('/createPost', formData, {
-//         headers: { 'Content-Type': 'multipart/form-data' }
-//       });
-//       toast.success("Posted Successfully");
-//       console.log('Post created:', response.data);
-//       setImageUrl(response.data.post.image);
-//     } catch (error) {
-//       console.error('Error creating post:', error);
-//     }
-//   };
-
-//   const handleClose = () => setSelectFile(null);
-
-//   const addPost = () => {
-//     if (selectFile) {
-//       handleApi(selectFile);
-//       handleClose();
-//     }
-//   };
-
   useEffect(() => {
     const fetchData = async () => {
       try {

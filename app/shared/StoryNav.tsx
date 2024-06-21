@@ -1,8 +1,9 @@
 import React from "react";
+import './story.css';
 
 const StoryNav = () => {
   return (
-    <div className="py-1">
+    <div className="py-1 str-div">
       <div className="story-1"></div>
       <div className="story-2"></div>
       <div className="story-3"></div>
@@ -12,25 +13,25 @@ const StoryNav = () => {
       <div className="story-7"></div>
 
       <div className="username-story">
-        <p className="ml-14">tommyshelby<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="10" height="auto" viewBox="0 0 48 48" className="ml-[72px] mt-[-13px]">
+        <p className="ml-14 str-1">tommyshelby<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="10" height="auto" viewBox="0 0 48 48" className="ml-[72px] mt-[-13px]">
         <polygon fill="#42a5f5" points="29.62,3 33.053,8.308 39.367,8.624 39.686,14.937 44.997,18.367 42.116,23.995 45,29.62 39.692,33.053 39.376,39.367 33.063,39.686 29.633,44.997 24.005,42.116 18.38,45 14.947,39.692 8.633,39.376 8.314,33.063 3.003,29.633 5.884,24.005 3,18.38 8.308,14.947 8.624,8.633 14.937,8.314 18.367,3.003 23.995,5.884"></polygon><polygon fill="#fff" points="21.396,31.255 14.899,24.76 17.021,22.639 21.428,27.046 30.996,17.772 33.084,19.926"></polygon>
         </svg></p>
-        <p className="ml-[163px] mt-[-15px]">cristiano<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="10" viewBox="0 0 48 48" className="ml-[45px] mt-[-13px]">
+        <p className="ml-[163px] mt-[-15px] str-2">cristiano<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="10" viewBox="0 0 48 48" className="ml-[45px] mt-[-13px]">
         <polygon fill="#42a5f5" points="29.62,3 33.053,8.308 39.367,8.624 39.686,14.937 44.997,18.367 42.116,23.995 45,29.62 39.692,33.053 39.376,39.367 33.063,39.686 29.633,44.997 24.005,42.116 18.38,45 14.947,39.692 8.633,39.376 8.314,33.063 3.003,29.633 5.884,24.005 3,18.38 8.308,14.947 8.624,8.633 14.937,8.314 18.367,3.003 23.995,5.884"></polygon><polygon fill="#fff" points="21.396,31.255 14.899,24.76 17.021,22.639 21.428,27.046 30.996,17.772 33.084,19.926"></polygon>
         </svg></p>
-        <p className="ml-[243px] mt-[-15px]">dqsalmaan<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="10" viewBox="0 0 48 48" className="ml-[59px] mt-[-13px]">
+        <p className="ml-[243px] mt-[-15px] str-3">dqsalmaan<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="10" viewBox="0 0 48 48" className="ml-[59px] mt-[-13px]">
         <polygon fill="#42a5f5" points="29.62,3 33.053,8.308 39.367,8.624 39.686,14.937 44.997,18.367 42.116,23.995 45,29.62 39.692,33.053 39.376,39.367 33.063,39.686 29.633,44.997 24.005,42.116 18.38,45 14.947,39.692 8.633,39.376 8.314,33.063 3.003,29.633 5.884,24.005 3,18.38 8.308,14.947 8.624,8.633 14.937,8.314 18.367,3.003 23.995,5.884"></polygon><polygon fill="#fff" points="21.396,31.255 14.899,24.76 17.021,22.639 21.428,27.046 30.996,17.772 33.084,19.926"></polygon>
         </svg></p>
-        <p className="ml-[333px] mt-[-15px]">alonemusk<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="10" viewBox="0 0 48 48" className="ml-[59px] mt-[-13px]">
+        <p className="ml-[333px] mt-[-15px] str-4">alonemusk<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="10" viewBox="0 0 48 48" className="ml-[59px] mt-[-13px] ">
         <polygon fill="#42a5f5" points="29.62,3 33.053,8.308 39.367,8.624 39.686,14.937 44.997,18.367 42.116,23.995 45,29.62 39.692,33.053 39.376,39.367 33.063,39.686 29.633,44.997 24.005,42.116 18.38,45 14.947,39.692 8.633,39.376 8.314,33.063 3.003,29.633 5.884,24.005 3,18.38 8.308,14.947 8.624,8.633 14.937,8.314 18.367,3.003 23.995,5.884"></polygon><polygon fill="#fff" points="21.396,31.255 14.899,24.76 17.021,22.639 21.428,27.046 30.996,17.772 33.084,19.926"></polygon>
         </svg></p>
-        <p className="ml-[433px] mt-[-15px]">eminem<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="10" viewBox="0 0 48 48" className="ml-[43px] mt-[-13px]">
+        <p className="ml-[433px] mt-[-15px] str-5">eminem<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="10" viewBox="0 0 48 48" className="ml-[43px] mt-[-13px]">
         <polygon fill="#42a5f5" points="29.62,3 33.053,8.308 39.367,8.624 39.686,14.937 44.997,18.367 42.116,23.995 45,29.62 39.692,33.053 39.376,39.367 33.063,39.686 29.633,44.997 24.005,42.116 18.38,45 14.947,39.692 8.633,39.376 8.314,33.063 3.003,29.633 5.884,24.005 3,18.38 8.308,14.947 8.624,8.633 14.937,8.314 18.367,3.003 23.995,5.884"></polygon><polygon fill="#fff" points="21.396,31.255 14.899,24.76 17.021,22.639 21.428,27.046 30.996,17.772 33.084,19.926"></polygon>
         </svg></p>
-        <p className="ml-[520px] mt-[-15px]">billieelish<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="10" viewBox="0 0 48 48" className="ml-[49px] mt-[-13px]">
+        <p className="ml-[520px] mt-[-15px] str-6">billieelish<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="10" viewBox="0 0 48 48" className="ml-[49px] mt-[-13px]">
         <polygon fill="#42a5f5" points="29.62,3 33.053,8.308 39.367,8.624 39.686,14.937 44.997,18.367 42.116,23.995 45,29.62 39.692,33.053 39.376,39.367 33.063,39.686 29.633,44.997 24.005,42.116 18.38,45 14.947,39.692 8.633,39.376 8.314,33.063 3.003,29.633 5.884,24.005 3,18.38 8.308,14.947 8.624,8.633 14.937,8.314 18.367,3.003 23.995,5.884"></polygon><polygon fill="#fff" points="21.396,31.255 14.899,24.76 17.021,22.639 21.428,27.046 30.996,17.772 33.084,19.926"></polygon>
         </svg></p>
-        <p className="ml-[615px] mt-[-15px]">debzee<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="10" viewBox="0 0 48 48" className="ml-[39px] mt-[-13px]">
+        <p className="ml-[615px] mt-[-15px] str-7">debzee<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="10" viewBox="0 0 48 48" className="ml-[39px] mt-[-13px]">
         <polygon fill="#42a5f5" points="29.62,3 33.053,8.308 39.367,8.624 39.686,14.937 44.997,18.367 42.116,23.995 45,29.62 39.692,33.053 39.376,39.367 33.063,39.686 29.633,44.997 24.005,42.116 18.38,45 14.947,39.692 8.633,39.376 8.314,33.063 3.003,29.633 5.884,24.005 3,18.38 8.308,14.947 8.624,8.633 14.937,8.314 18.367,3.003 23.995,5.884"></polygon><polygon fill="#fff" points="21.396,31.255 14.899,24.76 17.021,22.639 21.428,27.046 30.996,17.772 33.084,19.926"></polygon>
         </svg></p>
       </div>

@@ -94,7 +94,7 @@ export default function Home() {
           <img className="usebook-img" src="logo.png" alt="" />
           <h5
             style={{ position: "absolute", left: "140px", top: "330px" }}
-            className="font-bold"
+            className="font-bold usebook-content"
           >
             Usebook helps to connect and share
             <br />

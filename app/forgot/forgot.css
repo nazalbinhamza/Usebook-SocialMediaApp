@@ -48,3 +48,29 @@ body{
     margin-top: 10px;
     margin-left: 10px;
 }
+
+@media screen and (max-width:736px){
+    .logo-img{
+        width: 150px !important;
+        height: 25px !important;
+        margin-left: 20px;
+    }
+    .find-box{
+        height: 590px;
+        width: 340px;
+        margin-left: 20px;
+        margin-top: 130px;
+    }
+    .em-inp{
+        margin-left: 20px;
+        padding-left: 10px;
+        width: 257px;
+        height: 40px;
+    }
+    .forgot-img{
+        height: 100px;
+        width: 190px;
+        margin-top: 60px;
+        margin-right: 100px;
+    }
+}

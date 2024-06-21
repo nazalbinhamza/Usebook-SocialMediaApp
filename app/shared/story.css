@@ -1,0 +1,114 @@
+.story-1{
+    width: 70px ;
+    height: 70px ;
+    border-radius: 100px 100px 100px 100px ;
+    background-image: url('https://www.xosalonspa.com/wp-content/uploads/2023/07/thomas-shelby-haircut.webp');
+    background-size: cover;
+    background-position: center;
+    border: 3px solid rgb(41, 197, 41);
+    margin-left: 60px;
+    margin-top: 20px;
+}
+.story-2{
+    width: 70px ;
+    height: 70px ;
+    border-radius: 100px 100px 100px 100px ;
+    background-image: url('https://cdn.britannica.com/73/234573-050-8EE03E16/Cristiano-Ronaldo-ceremony-rename-airport-Santa-Cruz-Madeira-Portugal-March-29-2017.jpg');
+    background-size: cover;
+    background-position: center;
+    border: 3px solid rgb(41, 197, 41);
+    margin-left: 150px;
+    margin-top: -70px;
+}
+.story-3{
+    width: 70px ;
+    height: 70px ;
+    border-radius: 100px 100px 100px 100px ;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpN7Y9eeuUpHsqKCe6h4DmrSNp-Iicw-cXLAAQDsOtng&s');
+    background-size: cover;
+    background-position: center;
+    border: 3px solid rgb(41, 197, 41);
+    margin-left: 240px;
+    margin-top: -70px;
+}  
+.story-4{
+    width: 70px ;
+    height: 70px ;
+    border-radius: 100px 100px 100px 100px ;
+    background-image: url('https://bsmedia.business-standard.com/_media/bs/img/article/2024-03/06/full/1709749465-5141.jpg?im=FitAndFill=(826,465)');
+    background-size: cover;
+    background-position: center;
+    border: 3px solid rgb(41, 197, 41);
+    margin-left: 330px;
+    margin-top: -70px;
+}  
+.story-5{
+    width: 70px ;
+    height: 70px ;
+    border-radius: 100px 100px 100px 100px ;
+    background-image: url('https://media.npr.org/assets/music/news/2010/06/eminem_wide-9bf03a4bfc100c7218ffa3c8d9f8099bcc994bff-s1400-c100.jpg');
+    background-size: cover;
+    background-position: center;
+    border: 3px solid rgb(41, 197, 41);
+    margin-left: 420px;
+    margin-top: -70px;
+}  
+.story-6{
+    width: 70px ;
+    height: 70px ;
+    border-radius: 100px 100px 100px 100px ;
+    background-image: url('https://people.com/thmb/LdXGT-Gu8HcT6VHV8TxHyC0V0GQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(704x369:706x371)/Billie-Eilish-3faedce8e5594c63ba28097d35689892.jpg');
+    background-size: cover;
+    background-position: center;
+    border: 3px solid rgb(41, 197, 41);
+    margin-left: 510px;
+    margin-top: -70px;
+}  
+.story-7{
+    width: 70px ;
+    height: 70px ;
+    border-radius: 100px 100px 100px 100px ;
+    background-image: url('https://c.saavncdn.com/artists/Dabzee_000_20230516072112_500x500.jpg');
+    background-size: cover;
+    background-position: center;
+    border: 3px solid rgb(41, 197, 41);
+    margin-left: 600px;
+    margin-top: -70px;
+}  
+.username-story{
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+}
+
+@media screen and (max-width:736px){
+    .str-div{
+        margin-top: 90px;
+    }
+    .story-1{
+        display: none;
+    }
+    .story-2{
+        display: none;
+    }
+    .story-3{
+        display: none;
+    }  
+    .story-5{
+        width: 70px ;
+        height: 70px ;
+        margin-left: 420px;
+        margin-top: -70px;
+    }  
+    .str-1{
+        display: none;
+    }
+    .str-2{
+        display: none;
+    }
+    .str-3{
+        display: none;
+    }
+    .str-4{
+        margin-top: 10px;
+    }
+}

@@ -175,3 +175,52 @@ body {
     outline: none;
   }
   
+
+  @media screen and (max-width:736px){
+    .usebook-img{
+      width: 350px;
+      height: 50px;
+      margin-left: 20px;
+      margin-top: -190px;
+  }
+  .usebook-content{
+    margin-top: -170px;
+    margin-left: -100px;
+  }
+  .input-box{
+    width: 380px;
+    height: 420px;
+    position: absolute;
+    right: 5px;
+    bottom: 160px;
+  }
+  .email-inp{
+    margin-top: 40px;
+    margin-left: 34px;
+    width: 317px;
+    height: 40px;
+  }
+.pass-inp{
+    margin-left: 34px;
+    width: 317px;
+    height: 40px;
+  }
+  .pushable {
+    width:317px;
+    margin-left: 34px;
+  }
+  .forgotten{
+    margin-left: 120px;
+  }
+  .new-acc{
+    margin-left: 50px;
+    width: 290px;
+  }
+  .sm-sentence{
+    position: fixed;
+    top: 657px;
+    right: 40px;
+    left: 40px;
+  }
+  
+  }
