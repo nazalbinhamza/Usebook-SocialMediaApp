@@ -178,42 +178,42 @@ body {
 
   @media screen and (max-width:736px){
     .usebook-img{
-      width: 350px;
-      height: 50px;
-      margin-left: 20px;
-      margin-top: -190px;
+      width: 250px;
+      height: 40px;
+      margin-left: 10px;
+      margin-top: -200px;
   }
   .usebook-content{
-    margin-top: -170px;
-    margin-left: -100px;
+    margin-top: -230px;
+    margin-left: -120px;
   }
   .input-box{
-    width: 380px;
+    width: 360px;
     height: 420px;
     position: absolute;
-    right: 5px;
-    bottom: 160px;
+    right: -10px;
+    bottom: 120px;
   }
   .email-inp{
     margin-top: 40px;
-    margin-left: 34px;
+    margin-left: 24px;
     width: 317px;
     height: 40px;
   }
 .pass-inp{
-    margin-left: 34px;
+    margin-left: 24px;
     width: 317px;
     height: 40px;
   }
   .pushable {
     width:317px;
-    margin-left: 34px;
+    margin-left: 24px;
   }
   .forgotten{
-    margin-left: 120px;
+    margin-left: 110px;
   }
   .new-acc{
-    margin-left: 50px;
+    margin-left: 35px;
     width: 290px;
   }
   .sm-sentence{
