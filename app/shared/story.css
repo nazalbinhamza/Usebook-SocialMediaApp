@@ -92,13 +92,22 @@
     }
     .story-3{
         display: none;
-    }  
+    } 
+    .story-4{
+        margin-left: 360px;
+    } 
     .story-5{
         width: 70px ;
         height: 70px ;
-        margin-left: 420px;
+        margin-left: 450px;
         margin-top: -70px;
     }  
+    .story-6{
+        margin-left: 545px;
+    }
+    .story-7{
+        margin-left: 645px;
+    }
     .str-1{
         display: none;
     }
@@ -110,5 +119,15 @@
     }
     .str-4{
         margin-top: 10px;
+        margin-left: 364px;
+    }
+    .str-5{
+        margin-left: 460px;
+    }
+    .str-6{
+        margin-left: 550px;
+    }
+    .str-7{
+       margin-left: 655px; 
     }
 }

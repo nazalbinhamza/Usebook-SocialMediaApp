@@ -152,7 +152,7 @@ body{
   @media screen and (max-width:736px){
     .new-post{
         width: 300px;
-        margin-left: 350px;
+        margin-left: 390px;
     }
     .post-btn{
         width: 200px;
@@ -164,7 +164,7 @@ body{
     .post-bg{
         width: 400px;
         height: 685px;
-        margin-left: 130px;
+        margin-left: 140px;
     }
     .img-post{
         width: 350px !important;
