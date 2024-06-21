@@ -217,10 +217,53 @@ body {
     width: 290px;
   }
   .sm-sentence{
-    position: fixed;
-    top: 657px;
-    right: 40px;
-    left: 40px;
+   display: none;
+  }
+  
+  }
+
+  @media screen and (max-width:687px){
+    .usebook-img{
+      width: 250px;
+      height: 40px;
+      margin-left: 35px;
+      margin-top: -150px;
+  }
+  .usebook-content{
+    margin-top: -170px;
+    margin-left: -100px;
+  }
+  .input-box{
+    width: 360px;
+    height: 420px;
+    position: absolute;
+    right: -10px;
+    bottom: -45px;
+  }
+  .email-inp{
+    margin-top: 40px;
+    margin-left: 24px;
+    width: 317px;
+    height: 40px;
+  }
+.pass-inp{
+    margin-left: 24px;
+    width: 317px;
+    height: 40px;
+  }
+  .pushable {
+    width:317px;
+    margin-left: 24px;
+  }
+  .forgotten{
+    margin-left: 110px;
+  }
+  .new-acc{
+    margin-left: 35px;
+    width: 290px;
+  }
+  .sm-sentence{
+    display: none;
   }
   
   }
