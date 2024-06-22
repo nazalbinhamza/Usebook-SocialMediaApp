@@ -75,7 +75,7 @@ export default function Home() {
           <Link href={"/forgot"}>
             <h6 className="forgotten">Forgotten password?</h6>
           </Link>
-          <Link href={"/Sign"}>
+          <Link href={"/sign"}>
             <button className="new-acc">Create new account</button>
           </Link>
         </div>
