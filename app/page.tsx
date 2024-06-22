@@ -72,7 +72,7 @@ export default function Home() {
               <span className="front">Log in</span>
             </button>
           </form>
-          <Link href={"/Forgot"}>
+          <Link href={"/forgot"}>
             <h6 className="forgotten">Forgotten password?</h6>
           </Link>
           <Link href={"/Sign"}>
@@ -83,7 +83,7 @@ export default function Home() {
           <span className="font-bold cursor-pointer">
             <Link
               style={{ textDecoration: "none", color: "black" }}
-              href={"/Sign"}
+              href={"/sign"}
             >
               Create a Page
             </Link>{" "}
