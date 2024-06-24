@@ -32,7 +32,7 @@ export default function Home() {
 
           toast.success("Login Successfully");
           setTimeout(() => {
-            window.location.href = "/home";
+            window.location.href = "/Home";
           }, 500);
         }
       } else {
