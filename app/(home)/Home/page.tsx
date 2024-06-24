@@ -14,7 +14,6 @@ import TextField from "@mui/material/TextField";
 import Fade from "@mui/material/Fade";
 import Backdrop from "@mui/material/Backdrop";
 import { GlobalContext } from "@/app/globalContext/context";
-import ClipLoader from "react-spinners/ClipLoader";
 
 interface Post {
   _id: string;
@@ -81,7 +80,6 @@ const Page = ()=> {
   };
 
   const handleApi = async (post: File) => {
-    setLoading(true);
     const formData = new FormData();
     formData.append('file', post);
     formData.append('desc', description);
@@ -248,13 +246,6 @@ const Page = ()=> {
             </Box>
           </Fade>
         </Modal>
-        {loading ? (
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-            <ClipLoader size={150} color={"black"} loading={loading} />
-          </div>
-        ) : (
-        <></>
-        )}
 
         {!isEmpty && (
           <>
