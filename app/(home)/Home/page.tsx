@@ -14,6 +14,7 @@ import TextField from "@mui/material/TextField";
 import Fade from "@mui/material/Fade";
 import Backdrop from "@mui/material/Backdrop";
 import { GlobalContext } from "@/app/globalContext/context";
+import Loader from "@/app/shared/loader/Loader";
 
 interface Post {
   _id: string;
@@ -58,7 +59,7 @@ const Page = ()=> {
   const [like, setLike] = useState<boolean>(false);
   const [count, setCount] = useState(0);
   const [comment, setComment] = useState('');
-  const [loading,setLoading] = useState(false)
+  const [isLoading,setIsLoading] = useState(true);
 
   // // State to store userId and username
   const [userId, setUserId] = useState<string | null>(null);
@@ -174,7 +175,18 @@ const Page = ()=> {
     }
   };
 
-  return (
+  useEffect(()=>{
+    const dataFetch = ()=> {
+      setTimeout(()=>{
+        setIsLoading(false)
+      }, 1500)
+    };
+    dataFetch();
+  },[])
+
+  return isLoading ? (
+    <Loader />
+  ):(
     <div>
       <SidNav />
       <Suggetion />
@@ -347,7 +359,7 @@ const Page = ()=> {
                     <svg
                       onClick={() => fetchLike(item._id)}
                       xmlns="http://www.w3.org/2000/svg"
-                      fill={!like ? "none" : "red"}
+                      fill={setPost ? "none" : "none"}
                       viewBox="0 0 24 24"
                       strokeWidth="1.5"
                       stroke="currentColor"
@@ -359,7 +371,7 @@ const Page = ()=> {
                         d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
                       />
                     </svg>
-                    <p className="ml-[73px]">{item.likes.length} likes</p>
+                    <p className="ml-[73px]">{item.likes?.length} likes</p>
                     <div className="circle2"></div>
 
                     <p className="ml-[53px] mt-[5px]">

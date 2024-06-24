@@ -46,7 +46,7 @@ const GlobalProvider = ({ children }: { children: ReactNode }) => {
     if (userId) {
       fetchData();
     }
-  }, [userId]);
+  }, [userId,post,setPost]);
 
   return (
     <GlobalContext.Provider value={{

@@ -2,8 +2,8 @@
 import { useState, useEffect } from "react";
 import "./page.css";
 import Link from "next/link";
-import axios from "axios";
 import { toast } from "react-hot-toast";
+import instance from "./instance/instance";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -12,8 +12,8 @@ export default function Home() {
   const handleClick = async (e: any) => {
     try {
       e.preventDefault();
-      const response = await axios.post(
-        "https://social-media-5ukj.onrender.com/auth/login",
+      const response = await instance.post(
+        "/auth/login",
         { email: email, password: password }
       );
       if (response.data.token) {
@@ -21,7 +21,7 @@ export default function Home() {
           localStorage.setItem("role", "user");
           localStorage.setItem("token", response.data.token);
           
-          const item = await axios.get("https://social-media-5ukj.onrender.com/user/");
+          const item = await instance.get("/user/");
           let x = item.data;
 
           const users = x.find((value: any) => value.email == email);

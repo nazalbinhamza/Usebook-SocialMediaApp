@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from 'react';
 import './sign.css';
-import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import instance from '../instance/instance';
 
 function page() {
 
@@ -12,7 +12,7 @@ function page() {
 
   const submitHandle = (e:any) => {
     e.preventDefault();
-    axios.post("https://social-media-5ukj.onrender.com/auth/register  ",{
+    instance.post("/auth/register",{
       username, password, email
     })
     toast.success('Form Submit Successfully');
