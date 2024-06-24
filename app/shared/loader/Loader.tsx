@@ -1,8 +1,10 @@
 import React from "react";
+import "./loader.css";
 
 function loader() {
   return (
-    <div className="loader h-[60px] w-[60px] ml-[700px] mt-[300px]">
+    <div className="container">
+    <div className="loader">
       <div className="svg-wrapper">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
           <linearGradient id="a11">
@@ -31,6 +33,7 @@ function loader() {
           </circle>
         </svg>
       </div>
+    </div>
     </div>
   );
 }

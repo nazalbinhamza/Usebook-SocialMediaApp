@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height of the viewport */
+    width: 100vw; /* Full width of the viewport */
+}
+
+.loader {
+    height: 60px;
+    width: 60px;
+    /* Additional styles for your loader (e.g., border, background, etc.) */
+}
