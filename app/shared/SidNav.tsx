@@ -33,8 +33,9 @@ function SindNav() {
         >
           <path d="M 21 3 C 11.601563 3 4 10.601563 4 20 C 4 29.398438 11.601563 37 21 37 C 24.355469 37 27.460938 36.015625 30.09375 34.34375 L 42.375 46.625 L 46.625 42.375 L 34.5 30.28125 C 36.679688 27.421875 38 23.878906 38 20 C 38 10.601563 30.398438 3 21 3 Z M 21 7 C 28.199219 7 34 12.800781 34 20 C 34 27.199219 28.199219 33 21 33 C 13.800781 33 8 27.199219 8 20 C 8 12.800781 13.800781 7 21 7 Z"></path>
         </svg>
+        <Link href={"/search"}>
           <h5 className="cursor-pointer font-semibold search-text">Search</h5>
-
+        </Link>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -91,8 +92,9 @@ function SindNav() {
             d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
           />
         </svg>
+        <Link href="/profile">
           <h5 className="cursor-pointer font-semibold profile-text">Profile</h5>
-
+        </Link>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
