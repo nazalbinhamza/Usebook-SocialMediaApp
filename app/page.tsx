@@ -29,7 +29,6 @@ export default function Home() {
             localStorage.setItem("userid", users._id);
             localStorage.setItem("username", users.username);
           }
-
           toast.success("Login Successfully");
           setTimeout(() => {
             window.location.href = "/Home";

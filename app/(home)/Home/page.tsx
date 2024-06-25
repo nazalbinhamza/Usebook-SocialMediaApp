@@ -46,11 +46,9 @@ const buttonStyle = {
 
 const Page = ()=> {
  const  { post, setPost} = useContext<any>(GlobalContext);
-
   const isEmpty = post.length === 0;
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState(false);
   const [selectFile, setSelectFile] = useState<File | null>(null);
@@ -70,7 +68,7 @@ const Page = ()=> {
     setUserId(userid);
     const username = typeof localStorage !== 'undefined' ? localStorage.getItem("username") : null;
     setUsername(username);
-  }, []);
+  }, []); 
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -267,7 +265,7 @@ const Page = ()=> {
                   <div>
                     <div className="circle1"></div>
                     <p className="ml-[75px] mt-[-30px] font-semibold font-sans">
-                      {localStorage.getItem("username")}
+                      {/* username space */}
                       <span className="font-normal text-sm ml-[5px] text-gray-500">
                         {" "}
                         2s
@@ -376,7 +374,7 @@ const Page = ()=> {
 
                     <p className="ml-[53px] mt-[5px]">
                       <a className="font-semibold">
-                        {localStorage.getItem("username")}
+                        {item.username}
                       </a>
                       <a>{item.desc}</a>
                     </p>
@@ -432,7 +430,7 @@ const Page = ()=> {
                         )}
                       </div>
                     ) : (
-                      <p>No comments for this post.</p>
+                      <></>
                     )}
                   </div>
                 </div>
