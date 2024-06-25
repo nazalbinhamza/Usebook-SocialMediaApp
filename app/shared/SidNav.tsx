@@ -71,7 +71,7 @@ function SindNav() {
             d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
           />
         </svg>
-        <Link href={"/Create"}>
+        <Link href={"/create"}>
           <h5 className="cursor-pointer font-semibold notification-text">
             Create
           </h5>
