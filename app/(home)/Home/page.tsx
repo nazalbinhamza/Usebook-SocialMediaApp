@@ -131,6 +131,23 @@ const Page = ()=> {
     }
   };
 
+  useEffect(() => {
+    // console.log("Users:");
+    post.forEach((user: any) => {
+      // console.log(user._id);
+  
+      const matchingPost = post.find((item: any) => item.userId === user._id);
+      // console.log(matchingPost,'this is mathcing post ');
+      // console.log(matchingPost.userId,'this is matching post ');
+      
+      
+      if (matchingPost) {
+        // console.log(Username for ${matchingPost});
+      }
+    });
+   
+  }, [post]);
+
   const deletePost = async (id: string) => {
     try {
       const data = {
