@@ -58,6 +58,7 @@ const Page = ()=> {
   const [count, setCount] = useState(0);
   const [comment, setComment] = useState('');
   const [isLoading,setIsLoading] = useState(true);
+  const [users, setUsers] = useState<any>([]);
 
   // // State to store userId and username
   const [userId, setUserId] = useState<string | null>(null);
@@ -77,6 +78,18 @@ const Page = ()=> {
       console.log("No file selected");
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await instance.get("/user");
+        setUsers(response.data);
+      } catch (error) {
+        console.log("Error fetching users:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleApi = async (post: File) => {
     const formData = new FormData();
@@ -131,22 +144,7 @@ const Page = ()=> {
     }
   };
 
-  useEffect(() => {
-    // console.log("Users:");
-    post.forEach((user: any) => {
-      // console.log(user._id);
-  
-      const matchingPost = post.find((item: any) => item.userId === user._id);
-      // console.log(matchingPost,'this is mathcing post ');
-      // console.log(matchingPost.userId,'this is matching post ');
-      
-      
-      if (matchingPost) {
-        // console.log(Username for ${matchingPost});
-      }
-    });
-   
-  }, [post]);
+
 
   const deletePost = async (id: string) => {
     try {
@@ -276,13 +274,16 @@ const Page = ()=> {
 
         {!isEmpty && (
           <>
-            {post.map((item: any, index: any) => (
+            {post.map((item: any, index: any) => {
+              const user = users.find((user: any) => user._id === item.userId);
+              const username = user ? user.username : "Unknown User";
+              return(
               <div key={item._id} className="post-div">
                 <div className="post-bg pl-[-70px] pt-[20px]">
                   <div>
                     <div className="circle1"></div>
                     <p className="ml-[75px] mt-[-30px] font-semibold font-sans">
-                      {/* username space */}
+                      {username}
                       <span className="font-normal text-sm ml-[5px] text-gray-500">
                         {" "}
                         2s
@@ -452,7 +453,8 @@ const Page = ()=> {
                   </div>
                 </div>
               </div>
-            ))}
+              )
+})}
           </>
         )}
       </div>
