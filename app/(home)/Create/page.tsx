@@ -1,14 +1,18 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import SindNav from '../../shared/SidNav';
 import Suggetion from '../../shared/suggetion';
 import './create.css';
 import { toast } from 'react-hot-toast';
 import instance from '@/app/instance/instance';
+import { GlobalContext } from "@/app/globalContext/context";
 
 function Page() {
-  const [post, setPost] = useState<any>([]);
   const [userId, setUserId] = useState<string | null>(null);
+  const  { post, setPost} = useContext<any>(GlobalContext);
+  const [selectFile, setSelectFile] = useState<File | null>(null);
+  const [description, setDescription] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     // Ensure this code runs only on the client side
@@ -20,12 +24,42 @@ function Page() {
     }
   }, []);
 
+  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectFile(e.target.files[0]);
+    } else {
+      console.log("No file selected");
+    }
+  };
+
+  const handleApi = async (post: File) => {
+    const formData = new FormData();
+    formData.append('file', post);
+    formData.append('desc', description);
+    formData.append('userId', userId || "");
+    try {
+      const response = await instance.post('/createPost', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      toast.success("Posted Successfully");
+      console.log('Post created:', response.data);
+    } catch (error) {
+      console.error('Error creating post:', error);
+    }
+  };
+
+  const addPost = () => {
+    if (selectFile) {
+      handleApi(selectFile);
+    }
+  };
+
   return (
     <div>
       <SindNav />
       <Suggetion />
       <div className="w-[700px] h-[100vh] float-right">
-        <div className='w-[600px] h-[350px] bg-white mt-[200px] ml-[20px] rounded-lg pl-[140px] pt-[70px]'>
+        <div className='w-[600px] h-[450px] bg-white mt-[200px] ml-[20px] rounded-lg pl-[140px] pt-[70px]'>
           <h3 className='font-bold mt-[-50px] ml-[80px]'>Create New Post</h3>
           <div className='w-[600px] ml-[-140px] h-[10px] border-b border-gray-400'></div>
           <label htmlFor="file" className="custum-file-upload mt-[33px]">
@@ -35,8 +69,10 @@ function Page() {
             <div className="text">
               <span>Click to upload image</span>
             </div>
-            <input id="file" type="file"/>
+            <input ref={fileInputRef} onChange={handleFile} id="file" type="file"/>
           </label>
+          <input value={description} onChange={(e) => setDescription(e.target.value)} placeholder='Add Caption' className='w-[300px] h-[40px] bg-gray-200 border-[0px] pl-[10px] text-[14px] mt-[10px]' /><br/>
+          <button onClick={addPost} className='w-[150px] h-[40px] bg-black text-white rounded-lg tracking-widest mt-[20px] ml-[70px]'>Post</button>
         </div>
       </div>
     </div>

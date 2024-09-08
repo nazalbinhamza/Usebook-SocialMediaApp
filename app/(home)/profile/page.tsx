@@ -208,13 +208,16 @@ function Page() {
         <p className="ml-[450px] mt-[10px]">🗽</p>
         <div className="highlight1-dp">
           <div className="inner-1"></div>
+          <p className='text-[12px] mt-[8px] ml-[15px]'>Travel 🌏</p>
         </div>
 
         <div className="highlight2-dp">
           <div className="inner-2"></div>
+          <p className='text-[12px] mt-[8px] ml-[35px]'>. .</p>
         </div>
         <div className="highlight3-dp">
           <div className="inner-3"></div>
+          <p className='text-[12px] mt-[8px] ml-[20px]'>#alone</p>
         </div>
         <div className="mt-20 w-[900px] ml-[200px]">
             <div

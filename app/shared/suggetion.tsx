@@ -104,8 +104,8 @@ function Suggetion() {
           <p className="ml-[350px] mt-[-18px] username-story cursor-pointer">See All</p>
         </div>
         {users.map((user) => (
-          <div key={user._id} className="cursor-pointer bg-white h-[60px] w-[377px] ml-[40px] rounded-md">
-            <div className="despa-dp mt-[4px]"></div>
+          <div key={user._id} className="cursor-pointer bg-white h-[60px] w-[377px] ml-[40px] rounded-md pt-[5 px] mt-[10px]">
+            <div className="despa-dp"></div>
             <p className="ml-[120px] mt-[-35px] username-story font-semibold">{user.username}</p>
             <p className="ml-[120px] username-story text-gray-600">Followed by user + 1...</p>
             <div className='float-right w-10 mr-10 mt-[-30px]'>

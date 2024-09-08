@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './sign.css';
 import { toast } from 'react-hot-toast';
 import instance from '../instance/instance';
+import Link from 'next/link';
 
 function page() {
 
@@ -53,6 +54,9 @@ function page() {
                     <input type='password' onChange={(e)=>setPassword(e.target.value)} placeholder='Create password'/>
                     <input type='submit' value={'Sign Up'} id='btn'/>
                 </form>
+                <Link href={'./'}>
+                <p className='mt-[75px] ml-[75px] font-semibold text-[12px]'>Already have an account?<span className='text-blue-700 text-[12px] font-semibold underline cursor-pointer'>Login</span></p>
+                </Link>
               </div>
               <div className='c'>
                    
