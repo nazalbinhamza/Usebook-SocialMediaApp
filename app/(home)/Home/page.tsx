@@ -206,7 +206,7 @@ const Page = ()=> {
       <div className="post-section float-right">
         <StoryNav />
 
-        <div className="new-post h-[80px] w-[620px] ml-[55px] mt-[30px] border-2 border-gray-400 rounded-md pl-[190px] pt-[20px] bg-white md:hidden">
+        <div className="new-post h-[80px] w-[620px] ml-[55px] mt-[30px] border-2 border-gray-400 rounded-md pl-[190px] pt-[20px] bg-white">
           <button
             className="border-2 border-gray-400 rounded-xl w-[250px] h-[40px] text-[12px] post-btn"
             onClick={handleOpen}
