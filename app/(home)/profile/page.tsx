@@ -197,7 +197,7 @@ function Page() {
         </Modal>
         {/* ********** */}
         <p className="ml-[450px] mt-[30px]">
-          <span className="font-bold">9</span> post
+          <span className="font-bold">{post.length}</span> post
         </p>
         <p className="ml-[535px] mt-[-24px]">
           <span className="font-bold">{followers}</span> followers
